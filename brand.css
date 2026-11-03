@@ -1,0 +1,46 @@
+/* Skyhoundz's values: canine well-being and the joy of playing together. */
+[data-page="brand"] h1, [data-page="brand"] h2 { letter-spacing: -.03em; }
+[data-page="brand"] p { word-break: keep-all; overflow-wrap: anywhere; }
+.brand-welcome { display: grid; grid-template-columns: .95fr 1.05fr; align-items: center; gap: 64px; padding-block: 64px 72px; }
+.brand-welcome-copy { min-width: 0; }
+.brand-welcome h1 { font-size: clamp(36px, 3.7vw, 54px); font-weight: 750; line-height: 1.3; }
+.brand-welcome h1 span { color: var(--purple-dark); }
+.brand-welcome p { max-width: 34em; margin-top: 24px; color: var(--muted); font-size: 16px; line-height: 1.9; }
+.brand-field-photo { display: block; width: 100%; height: auto; aspect-ratio: 800 / 502; object-fit: contain; border-radius: 4px; }
+.brand-values { background: #f7f3fb; }
+.brand-values-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; padding-block: 64px; }
+.brand-values h2 { font-size: clamp(26px, 2.5vw, 34px); line-height: 1.4; font-weight: 700; }
+.brand-values p { max-width: 35em; margin-top: 22px; color: #51445e; font-size: 16px; line-height: 1.9; }
+.brand-values p + p { margin-top: 16px; }
+.brand-inclusion { display: grid; grid-template-columns: .95fr 1.05fr; gap: 64px; align-items: start; padding-block: 80px; }
+.brand-inclusion h2 { font-size: 32px; line-height: 1.4; font-weight: 700; }
+.brand-inclusion p { max-width: 36em; color: var(--muted); font-size: 15px; line-height: 1.9; }
+.brand-inclusion .brand-inclusion-lead { margin-bottom: 20px; color: var(--ink); font-size: 19px; line-height: 1.8; font-weight: 550; }
+@media (max-width: 1100px) {
+  .brand-welcome, .brand-inclusion { gap: 36px; }
+  .brand-values-inner { gap: 40px; }
+}
+@media (max-width: 900px) {
+  .brand-welcome { grid-template-columns: 1fr; gap: 32px; padding-block: 44px 48px; }
+  .brand-welcome h1 { font-size: 44px; }
+  .brand-welcome p { max-width: 40em; }
+  .brand-field-photo { max-width: 800px; }
+  .brand-inclusion { grid-template-columns: 1fr; gap: 28px; }
+  .brand-inclusion { padding-block: 56px; }
+  .brand-inclusion p { max-width: none; }
+}
+@media (max-width: 600px) {
+  .brand-welcome { padding-block: 32px 40px; gap: 28px; }
+  .brand-welcome h1 { font-size: clamp(30px, 7.8vw, 40px); line-height: 1.35; }
+  .brand-welcome p { margin-top: 20px; font-size: 15px; line-height: 1.85; }
+  .brand-welcome p br { display: none; }
+  .brand-values-inner { grid-template-columns: 1fr; gap: 40px; padding-block: 40px; }
+  .brand-values h2, .brand-inclusion h2 { font-size: 27px; }
+  .brand-values p { margin-top: 18px; font-size: 15px; }
+  .brand-values p + p { margin-top: 14px; }
+  .brand-values p br { display: none; }
+  .brand-inclusion { padding-block: 44px; gap: 24px; }
+  .brand-inclusion .brand-inclusion-lead { font-size: 17px; margin-bottom: 16px; }
+  .brand-inclusion p { font-size: 14px; }
+  .brand-inclusion p br { display: none; }
+}

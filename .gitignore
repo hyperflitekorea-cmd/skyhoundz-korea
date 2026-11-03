@@ -1,0 +1,16 @@
+# Local tools, private planning notes, review images and generated bundles.
+.tools/
+.impeccable/
+dist/
+.deploy/
+.deploy-files.json
+*.md
+preview.png
+assets/brand-references/
+assets/sources.json
+assets/*-edit.md
+scripts/fetch-shop-images.py
+__pycache__/
+.env
+.env.*
+
