@@ -2,6 +2,8 @@
   'use strict';
 
   const source = 'https://hyperflite.com/discs-overview/';
+  // Requested preview buttons only; this is not an inventory declaration.
+  const stockRequestProductIds = new Set(['alpha-jawz', 'z-disc-x-comp', 'k-10-frostbite', 'k-10-x-comp']);
   const existingProducts = [
     {
       id: 'cs',
@@ -83,6 +85,7 @@
       image: window.SHOP_IMAGES[`${series.id}-${item.id}`],
       family: series.id,
       formulation: item.id,
+      requestOnly: stockRequestProductIds.has(`${series.id}-${item.id}`),
       keywords: `${existing?.keywords || ''} ${series.label} ${spec.materialKo}`,
       source: item.source,
     };
@@ -105,6 +108,7 @@
     };
     const aliases = { discs: 'shop', story: 'brand', learn: 'training' };
     const cartStorageKey = 'skyhoundz-korea-cart-v1';
+    const requestStorageKey = 'skyhoundz-korea-stock-request-preview-v1';
     const productGrid = document.querySelector('#product-grid');
     const productCount = document.querySelector('#product-count');
     const shopMenu = window.SHOP_MENU;
@@ -140,9 +144,67 @@
       : [];
     let storageAvailable = true;
     let cart = readCart();
+    let requestStorageAvailable = true;
+    let stockRequests = readStockRequests();
 
     function getProduct(id) {
       return products.find((product) => product.id === id);
+    }
+
+    function readStockRequests() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(requestStorageKey) || '[]');
+        return new Set(Array.isArray(saved) ? saved.filter((id) => stockRequestProductIds.has(id)) : []);
+      } catch {
+        requestStorageAvailable = false;
+        return new Set();
+      }
+    }
+
+    function requestButtonContent(selected) {
+      const path = selected ? 'm5 12 4 4L19 6' : 'M12 5v14M5 12h14';
+      return `<span>${selected ? '선택 취소' : '입고해주세요'}</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="${path}" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    }
+
+    function requestNote(selected) {
+      const note = selected ? '시안에서 선택했어요. 실제 요청은 전송되지 않습니다.' : '시안용 선택 · 실제 요청은 전송되지 않습니다.';
+      return requestStorageAvailable ? note : `${note} 브라우저 저장이 차단되어 새로고침하면 선택이 유지되지 않을 수 있어요.`;
+    }
+
+    function renderStockRequest(product) {
+      const selected = stockRequests.has(product.id);
+      return `<div class="stock-request">
+        <button class="button button-secondary stock-request-button" type="button" data-stock-request="${product.id}" data-selected="${selected}" aria-label="${product.name} ${selected ? '입고 요청 선택 취소' : '입고해주세요'}">${requestButtonContent(selected)}</button>
+        <p class="stock-request-note" data-stock-feedback="${product.id}" role="status">${requestNote(selected)}</p>
+      </div>`;
+    }
+
+    function updateStockRequestControls() {
+      document.querySelectorAll('[data-stock-request]').forEach((button) => {
+        const product = getProduct(button.dataset.stockRequest);
+        if (!product?.requestOnly) return;
+        const selected = stockRequests.has(product.id);
+        button.dataset.selected = String(selected);
+        button.setAttribute('aria-label', `${product.name} ${selected ? '입고 요청 선택 취소' : '입고해주세요'}`);
+        button.innerHTML = requestButtonContent(selected);
+      });
+      document.querySelectorAll('[data-stock-feedback]').forEach((note) => {
+        note.textContent = requestNote(stockRequests.has(note.dataset.stockFeedback));
+      });
+    }
+
+    function toggleStockRequest(id) {
+      if (!getProduct(id)?.requestOnly) return;
+      if (stockRequests.has(id)) stockRequests.delete(id);
+      else stockRequests.add(id);
+      try {
+        localStorage.setItem(requestStorageKey, JSON.stringify([...stockRequests]));
+        requestStorageAvailable = true;
+      } catch {
+        requestStorageAvailable = false;
+      }
+      // Keep the existing button node so keyboard focus survives the toggle.
+      updateStockRequestControls();
     }
 
     function normalizeQuantity(value, fallback = 1) {
@@ -259,8 +321,8 @@
                   <p class="product-series">${product.material}</p>
                   <h3><button type="button" data-product="${product.id}">${product.name}</button></h3>
                   <p class="product-spec">${product.size}<span aria-hidden="true"> / </span>${product.weight}</p>
-                  <p class="product-price">판매가 공개 예정</p>
-                  <button class="button button-secondary product-buy" type="button" data-product="${product.id}">구매 옵션 ${arrow}</button>
+                  <p class="product-price">${product.requestOnly ? '입고 검토 후보' : '판매가 공개 예정'}</p>
+                  ${product.requestOnly ? renderStockRequest(product) : `<button class="button button-secondary product-buy" type="button" data-product="${product.id}">구매 옵션 ${arrow}</button>`}
                 </div>
               </article>
             `).join('')
@@ -288,7 +350,7 @@
             <div><dt>무게</dt><dd>${product.weight}</dd></div>
           </dl>
           <p class="product-dialog-note">국내 판매가와 입고 일정은 오픈 시 안내합니다.</p>
-          <form class="product-options" id="product-options-form" data-product-id="${product.id}">
+          ${product.requestOnly ? renderStockRequest(product) : `<form class="product-options" id="product-options-form" data-product-id="${product.id}">
             <p class="product-color-note"><strong>색상</strong> 현재 이미지는 대표 색상입니다. 판매 색상은 입고 시 안내합니다.</p>
             <label for="product-quantity">수량</label>
             <div class="quantity-control">
@@ -301,7 +363,7 @@
             <p class="product-feedback" id="product-feedback" role="status" aria-live="polite"></p>
             <button class="text-link" type="button" data-open-cart hidden id="product-view-cart">장바구니 보기 ${arrow}</button>
             <p class="product-cart-note">장바구니에 선택한 원반을 보관할 수 있어요. 판매가와 입고 일정 확정 전에는 결제할 수 없습니다.</p>
-          </form>
+          </form>`}
           <a class="text-link" href="${product.source}" target="_blank" rel="noopener noreferrer">Hyperflite 공식 제품 정보 ${arrow}<span class="sr-only"> (새 창)</span></a>
         </div>
       `;
@@ -312,7 +374,7 @@
     function addProductToCart(form) {
       const product = getProduct(form.dataset.productId);
       const input = form.querySelector('[name="quantity"]');
-      if (!product || !input || !form.reportValidity()) return;
+      if (!product || product.requestOnly || !input || !form.reportValidity()) return;
       const quantity = normalizeQuantity(input.value);
       input.value = String(quantity);
       const existing = cart.find((item) => item.id === product.id);
@@ -705,6 +767,12 @@
         }
       }
 
+      const requestButton = target.closest('[data-stock-request]');
+      if (requestButton) {
+        toggleStockRequest(requestButton.dataset.stockRequest);
+        return;
+      }
+
       const productButton = target.closest('[data-product]');
       if (productButton) {
         openProduct(productButton.dataset.product);
@@ -897,6 +965,10 @@
       if (window.location.hash !== '#main') renderRoute();
     });
     window.addEventListener('storage', (event) => {
+      if (event.key === requestStorageKey || event.key === null) {
+        stockRequests = readStockRequests();
+        updateStockRequestControls();
+      }
       if (event.key !== cartStorageKey) return;
       try { cart = sanitizeCart(JSON.parse(event.newValue || '[]')); } catch { cart = []; }
       updateCartCount();

@@ -40,6 +40,13 @@
 .shop-empty h3{font-size:20px;line-height:1.5;letter-spacing:-.02em}
 .shop-empty p{font-size:14px;color:var(--muted);line-height:1.8;margin-block:12px 20px}
 .shop-empty .text-link{justify-content:center}
+.stock-request{display:grid;gap:10px}
+.stock-request-button{width:100%;min-height:48px;justify-content:space-between;gap:12px}
+.stock-request-button[data-selected="true"]{background:var(--pale);border-color:var(--purple-dark);color:var(--purple-dark)}
+.stock-request-button:hover{border-color:var(--purple-dark);color:var(--purple-dark)}
+.stock-request-button svg{width:20px;height:20px;flex-shrink:0}
+.stock-request-note{font-size:12px;line-height:1.7;color:var(--muted);word-break:keep-all;overflow-wrap:anywhere}
+.product-dialog-info .stock-request{margin-block:24px}
 @media(max-width:600px){
   .shop-browse{margin-bottom:28px}.shop-browse-groups{gap:0 8px;justify-content:flex-start}
   .shop-browse-groups a{min-height:48px;font-size:13px;padding-inline:10px}

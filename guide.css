@@ -37,17 +37,20 @@
 .guide-size-models strong { display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:18px; }
 .guide-size-models svg { width:17px; height:17px; flex-shrink:0; }
 .guide-size-models span { font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums; }
-.guide-material-groups { display:grid; grid-template-columns:1fr 1fr; gap:48px; margin-top:32px; }
-.guide-material-group > h3 { font-size:18px; padding-bottom:16px; border-bottom:2px solid var(--ink); }
-.guide-material { padding-block:24px; border-bottom:1px solid var(--line); }
-.guide-material-heading { display:grid; grid-template-columns:88px minmax(0,1fr); align-items:center; gap:20px; }
+.guide-material-groups { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; margin-top:32px; }
+/* Both groups share a heading row and three rows per material. Copy can grow
+   naturally while the paired cards, specifications and bars stay aligned. */
+.guide-material-group { display:grid; grid-row:span 10; grid-template-rows:subgrid; min-width:0; }
+.guide-material-group > h3 { font-size:18px; line-height:1.6; align-self:end; word-break:keep-all; }
+.guide-material { display:grid; grid-row:span 3; grid-template-rows:subgrid; row-gap:18px; min-width:0; padding:24px; border:1px solid var(--line); border-radius:12px; background:var(--soft); }
+.guide-material-heading { display:grid; grid-template-columns:88px minmax(0,1fr); align-items:start; gap:20px; }
 .guide-material-heading img { width:88px; height:88px; object-fit:contain; }
-.guide-material h4 { font-size:23px; letter-spacing:-.02em; }
-.guide-material-heading p { color:var(--muted); font-size:14px; line-height:1.7; margin-top:8px; }
-.guide-material dl { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) minmax(0,1fr); gap:12px; margin-top:20px; }
+.guide-material h4 { font-size:23px; line-height:1.3; letter-spacing:-.02em; overflow-wrap:anywhere; }
+.guide-material-heading p { color:var(--muted); font-size:14px; line-height:1.7; margin-top:8px; word-break:keep-all; overflow-wrap:anywhere; }
+.guide-material dl { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) minmax(0,1fr); gap:12px; margin:0; }
 .guide-material dt { font-size:12px; color:var(--muted); margin-bottom:7px; }
 .guide-material dd { margin:0; font-size:14px; font-weight:600; line-height:1.5; }
-.guide-durability { margin-top:18px; display:grid; grid-template-columns:1fr auto; gap:10px; font-size:12px; color:var(--muted); }
+.guide-durability { display:grid; grid-template-columns:1fr auto; gap:10px; font-size:12px; color:var(--muted); }
 .guide-durability strong { color:var(--ink); font-variant-numeric:tabular-nums; }
 .guide-durability-track { grid-column:1/-1; height:5px; background:var(--line); }
 .guide-durability-track span { display:block; height:100%; width:var(--durability); background:var(--purple); }
@@ -94,7 +97,8 @@
 @media(max-width:900px) {
   .guide-size-row { grid-template-columns:190px 1fr; gap:20px; }
   .guide-size-models { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .guide-material-groups { gap:28px; }
+  .guide-material-groups { gap:20px; }
+  .guide-material { padding:20px; }
   .guide-material-heading { grid-template-columns:64px minmax(0,1fr); gap:16px; }
   .guide-material-heading img { width:64px; height:64px; }
   .guide-material h4 { font-size:20px; }
@@ -113,6 +117,8 @@
   .guide-size-models { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
   .guide-size-models a { padding:14px; }
   .guide-material-groups, .guide-technology { grid-template-columns:1fr; gap:32px; }
+  .guide-material-group { grid-row:auto; grid-template-rows:none; gap:16px; }
+  .guide-material { grid-row:auto; grid-template-rows:auto auto auto; gap:18px; padding:20px; }
   .guide-material-heading { grid-template-columns:72px minmax(0,1fr); }
   .guide-material-heading img { width:72px; height:72px; }
   .guide-photo-note { margin-top:-20px; padding-bottom:20px; }
