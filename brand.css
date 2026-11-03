@@ -12,6 +12,16 @@
 .brand-values h2 { font-size: clamp(26px, 2.5vw, 34px); line-height: 1.4; font-weight: 700; }
 .brand-values p { max-width: 35em; margin-top: 22px; color: #51445e; font-size: 16px; line-height: 1.9; }
 .brand-values p + p { margin-top: 16px; }
+.brand-hyperflite { padding-block: 72px 56px; }
+.hyperflite-story { display: grid; grid-template-columns: .95fr 1.05fr; gap: 64px; align-items: start; }
+.hyperflite-heading img { display: block; width: min(280px, 100%); height: auto; margin-bottom: 32px; }
+.hyperflite-heading h2 { font-size: clamp(27px, 2.5vw, 34px); line-height: 1.4; font-weight: 700; }
+.hyperflite-story-copy p { max-width: 40em; color: var(--muted); font-size: 16px; line-height: 1.9; }
+.hyperflite-story-copy p:first-child { color: var(--ink); }
+.hyperflite-story-copy p + p { margin-top: 20px; }
+.hyperflite-principles { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 48px; }
+.hyperflite-principles h3 { font-size: 22px; line-height: 1.5; font-weight: 700; }
+.hyperflite-principles p { max-width: 36em; margin-top: 16px; color: var(--muted); font-size: 15px; line-height: 1.9; }
 .brand-inclusion { display: grid; grid-template-columns: .95fr 1.05fr; gap: 64px; align-items: start; padding-block: 80px; }
 .brand-inclusion h2 { font-size: 32px; line-height: 1.4; font-weight: 700; }
 .brand-inclusion p { max-width: 36em; color: var(--muted); font-size: 15px; line-height: 1.9; }
@@ -19,6 +29,8 @@
 @media (max-width: 1100px) {
   .brand-welcome, .brand-inclusion { gap: 36px; }
   .brand-values-inner { gap: 40px; }
+  .hyperflite-story { gap: 36px; }
+  .hyperflite-principles { gap: 40px; }
 }
 @media (max-width: 900px) {
   .brand-welcome { grid-template-columns: 1fr; gap: 32px; padding-block: 44px 48px; }
@@ -28,6 +40,9 @@
   .brand-inclusion { grid-template-columns: 1fr; gap: 28px; }
   .brand-inclusion { padding-block: 56px; }
   .brand-inclusion p { max-width: none; }
+  .brand-hyperflite { padding-block: 56px 32px; }
+  .hyperflite-story { grid-template-columns: 1fr; gap: 28px; }
+  .hyperflite-story-copy p { max-width: none; }
 }
 @media (max-width: 600px) {
   .brand-welcome { padding-block: 32px 40px; gap: 28px; }
@@ -43,4 +58,13 @@
   .brand-inclusion .brand-inclusion-lead { font-size: 17px; margin-bottom: 16px; }
   .brand-inclusion p { font-size: 14px; }
   .brand-inclusion p br { display: none; }
+  .brand-hyperflite { padding-block: 44px 24px; }
+  .hyperflite-heading img { width: min(240px, 100%); margin-bottom: 26px; }
+  .hyperflite-heading h2 { font-size: 27px; }
+  .hyperflite-story-copy p { font-size: 15px; }
+  .hyperflite-story-copy p + p { margin-top: 16px; }
+  .hyperflite-principles { grid-template-columns: 1fr; gap: 28px; margin-top: 32px; }
+  .hyperflite-principles h3 { font-size: 21px; }
+  .hyperflite-principles p { font-size: 14px; margin-top: 12px; }
+  .hyperflite-principles p br { display: none; }
 }
