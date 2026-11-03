@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const output = resolve(root, 'dist');
-const files = new Set(['index.html', '.nojekyll']);
+const files = new Set(['index.html', '.nojekyll', 'assets/fonts/Barlow-OFL.txt', 'assets/fonts/Pretendard-LICENSE.txt']);
 const html = readFileSync(resolve(root, 'index.html'), 'utf8');
 for (const match of html.matchAll(/(?:src|href)="([^"?#]+\.(?:js|css))(?:\?[^"#]*)?"/g)) {
   if (!/^https?:/.test(match[1])) files.add(match[1]);
