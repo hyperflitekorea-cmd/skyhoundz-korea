@@ -89,7 +89,7 @@
       keywords: `${existing?.keywords || ''} ${series.label} ${spec.materialKo}`,
       source: item.source,
     };
-  }));
+  })).concat(window.GOODS_PRODUCTS || []);
   const comparisonProducts = existingProducts.map((original) => products.find((product) => product.id === original.id));
   window.PRODUCTS = products;
 
@@ -149,6 +149,12 @@
 
     function getProduct(id) {
       return products.find((product) => product.id === id);
+    }
+
+    function productVisual(product, size = 600) {
+      return product.image
+        ? `<img src="${product.image}" alt="${product.isGoods ? product.name : `Hyperflite ${product.name} 원반`}" loading="lazy" width="${size}" height="${size}">`
+        : '<span class="product-photo-placeholder">상품 사진<br>준비 중</span>';
     }
 
     function readStockRequests() {
@@ -312,17 +318,17 @@
       if (productGrid) {
         productGrid.innerHTML = filteredProducts.length
           ? filteredProducts.map((product) => `
-              <article class="product-card">
+              <article class="product-card${product.isGoods ? ' product-card--goods' : ''}">
                 <button class="product-image-button" type="button" data-product="${product.id}" aria-label="${product.name} 상세 보기">
-                  <img src="${product.image}" alt="Hyperflite ${product.name} 원반" loading="lazy" width="600" height="600">
+                  ${productVisual(product)}
                   <span class="product-open-icon">${arrow}</span>
                 </button>
                 <div class="product-meta">
                   <p class="product-series">${product.material}</p>
                   <h3><button type="button" data-product="${product.id}">${product.name}</button></h3>
-                  <p class="product-spec">${product.size}<span aria-hidden="true"> / </span>${product.weight}</p>
+                  <p class="product-spec">${product.isGoods ? '상세 정보 준비 중' : `${product.size}<span aria-hidden="true"> / </span>${product.weight}`}</p>
                   <p class="product-price">${product.requestOnly ? '입고 검토 후보' : '판매가 공개 예정'}</p>
-                  ${product.requestOnly ? renderStockRequest(product) : `<button class="button button-secondary product-buy" type="button" data-product="${product.id}">구매 옵션 ${arrow}</button>`}
+                  ${product.requestOnly ? renderStockRequest(product) : `<button class="button button-secondary product-buy" type="button" data-product="${product.id}">${product.isGoods ? '상품 정보' : '구매 옵션'} ${arrow}</button>`}
                 </div>
               </article>
             `).join('')
@@ -339,13 +345,13 @@
       closeDialog(searchDialog);
       productDialogContent.innerHTML = `
         <div class="product-dialog-image">
-          <img src="${product.image}" alt="Hyperflite ${product.name} 원반" width="600" height="600">
+          ${productVisual(product)}
         </div>
         <div class="product-dialog-info">
           <h2 id="product-title">${product.name}</h2>
-          <p class="product-material">HYPERFLITE / ${product.material}</p>
+          <p class="product-material">${product.isGoods ? 'SKYHOUNDZ KOREA' : 'HYPERFLITE'} / ${product.material}</p>
           <p class="product-dialog-description">${product.description}</p>
-          <dl class="product-dialog-specs">
+          ${product.isGoods ? '<p class="product-dialog-note">판매 준비 중</p>' : `<dl class="product-dialog-specs">
             <div><dt>지름</dt><dd>${product.size}</dd></div>
             <div><dt>무게</dt><dd>${product.weight}</dd></div>
           </dl>
@@ -364,7 +370,7 @@
             <button class="text-link" type="button" data-open-cart hidden id="product-view-cart">장바구니 보기 ${arrow}</button>
             <p class="product-cart-note">장바구니에 선택한 원반을 보관할 수 있어요. 판매가와 입고 일정 확정 전에는 결제할 수 없습니다.</p>
           </form>`}
-          <a class="text-link" href="${product.source}" target="_blank" rel="noopener noreferrer">Hyperflite 공식 제품 정보 ${arrow}<span class="sr-only"> (새 창)</span></a>
+          <a class="text-link" href="${product.source}" target="_blank" rel="noopener noreferrer">Hyperflite 공식 제품 정보 ${arrow}<span class="sr-only"> (새 창)</span></a>`}
         </div>
       `;
       productDialog.setAttribute('aria-labelledby', 'product-title');
@@ -374,7 +380,7 @@
     function addProductToCart(form) {
       const product = getProduct(form.dataset.productId);
       const input = form.querySelector('[name="quantity"]');
-      if (!product || product.requestOnly || !input || !form.reportValidity()) return;
+      if (!product || product.requestOnly || product.isGoods || !input || !form.reportValidity()) return;
       const quantity = normalizeQuantity(input.value);
       input.value = String(quantity);
       const existing = cart.find((item) => item.id === product.id);
@@ -617,12 +623,12 @@
         const empty = document.createElement('div');
         empty.className = 'search-empty';
         const message = document.createElement('p');
-        message.textContent = `“${searchInput.value.trim()}”에 맞는 원반을 찾지 못했어요.`;
+        message.textContent = `“${searchInput.value.trim()}”에 맞는 상품을 찾지 못했어요.`;
         const reset = document.createElement('button');
         reset.className = 'text-link';
         reset.type = 'button';
         reset.dataset.resetSearch = '';
-        reset.textContent = '전체 원반 보기';
+        reset.textContent = '전체 상품 보기';
         empty.append(message, reset);
         searchResults.append(empty);
         return;
@@ -630,8 +636,8 @@
 
       searchResults.innerHTML = matches.map((product) => `
         <button class="search-result" type="button" data-product="${product.id}">
-          <img src="${product.image}" alt="" width="80" height="80">
-          <span class="search-result-copy"><strong>${product.name}</strong><span>${product.material} · ${product.size} / ${product.weight}</span></span>
+          ${productVisual(product, 80)}
+          <span class="search-result-copy"><strong>${product.name}</strong><span>${product.isGoods ? `${product.material} · 상세 정보 준비 중` : `${product.material} · ${product.size} / ${product.weight}`}</span></span>
           <span class="search-result-arrow">${arrow}</span>
         </button>
       `).join('');

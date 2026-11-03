@@ -30,3 +30,15 @@ window.SHOP_MENU = [
     return { id, label, source: `https://hyperflite.com/${series.id}-${id}-disc/` };
   }),
 }));
+
+// User-confirmed names; photos, specifications and prices are not supplied yet.
+window.GOODS_PRODUCTS = [
+  { id: 'goods-tshirt-2026', name: '스카이하운즈 코리아 2026 티셔츠', material: '티셔츠', keywords: '굿즈 티셔츠 티 T-shirt tshirt 2026 Skyhoundz Korea' },
+  { id: 'goods-keyring', name: '스카이하운즈 코리아 키링', material: '키링', keywords: '굿즈 키링 열쇠고리 keyring keychain Skyhoundz Korea' },
+].map((product) => ({
+  ...product,
+  family: 'goods',
+  isGoods: true,
+  image: '',
+  description: '상품 사진과 상세 사양, 판매가를 준비하고 있습니다. 판매 일정과 옵션은 추후 안내합니다.',
+}));
