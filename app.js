@@ -97,14 +97,14 @@
 
   function initialize() {
     const routes = {
-      home: 'Skyhoundz Korea · Hyperflite',
-      brand: '브랜드 소개 · Skyhoundz Korea',
-      shop: '디스크 쇼핑 · Skyhoundz Korea',
-      guide: '원반 가이드 · Skyhoundz Korea',
-      compare: '제품 비교 · 원반 가이드 · Skyhoundz Korea',
-      competition: '대회 · Skyhoundz Korea',
-      training: '훈련 가이드 · Skyhoundz Korea',
-      clubs: '국내 클럽 · Skyhoundz Korea',
+      home: '하이퍼플라이트 코리아 | Hyperflite Korea',
+      brand: '브랜드 소개 · Hyperflite Korea',
+      shop: '디스크 쇼핑 · Hyperflite Korea',
+      guide: '원반 가이드 · Hyperflite Korea',
+      compare: '제품 비교 · 원반 가이드 · Hyperflite Korea',
+      competition: 'Skyhoundz 대회 · Hyperflite Korea',
+      training: '훈련 가이드 · Hyperflite Korea',
+      clubs: '국내 클럽 · Hyperflite Korea',
     };
     const aliases = { discs: 'shop', story: 'brand', learn: 'training' };
     const cartStorageKey = 'skyhoundz-korea-cart-v1';
