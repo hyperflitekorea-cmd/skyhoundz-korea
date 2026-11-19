@@ -1,93 +1,115 @@
-/* Hyperflite: purpose-built dog discs, field experience and shared play. */
-[data-page="brand"] h1, [data-page="brand"] h2 { letter-spacing: -.03em; }
-[data-page="brand"] p { word-break: keep-all; overflow-wrap: anywhere; }
-.brand-welcome { display: grid; grid-template-columns: .95fr 1.05fr; align-items: center; gap: 64px; padding-block: 64px 72px; }
+/* Hyperflite: dog discs, the people behind them, and the sport they support. */
+[data-page="brand"] h1,
+[data-page="brand"] h2,
+[data-page="brand"] h3 { letter-spacing: -.03em; }
+[data-page="brand"] p,
+[data-page="brand"] dd { word-break: keep-all; overflow-wrap: anywhere; }
+[data-page="brand"] a:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
+.brand-welcome { display: grid; grid-template-columns: .92fr 1.08fr; gap: 64px; align-items: center; padding-block: 76px 88px; }
 .brand-welcome-copy { min-width: 0; }
-.brand-intro-logo { display: block; width: min(300px, 100%); height: auto; margin-bottom: 28px; }
-.brand-welcome h1 { font-size: clamp(36px, 3.7vw, 54px); font-weight: 750; line-height: 1.3; }
-.brand-welcome h1 span { color: var(--purple-dark); }
-.brand-welcome p { max-width: 34em; margin-top: 24px; color: var(--muted); font-size: 16px; line-height: 1.9; }
-.brand-field-photo { display: block; width: 100%; height: auto; aspect-ratio: 800 / 502; object-fit: contain; border-radius: 4px; }
-.brand-values { background: #f7f3fb; }
-.brand-values-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; padding-block: 64px; }
-.brand-values h2 { font-size: clamp(26px, 2.5vw, 34px); line-height: 1.4; font-weight: 700; }
-.brand-values p { max-width: 35em; margin-top: 22px; color: #51445e; font-size: 16px; line-height: 1.9; }
-.brand-values p + p { margin-top: 16px; }
-.brand-hyperflite { padding-block: 0 72px; }
-.hyperflite-story { display: grid; grid-template-columns: .95fr 1.05fr; gap: 64px; align-items: start; }
-.hyperflite-heading img { display: block; width: min(280px, 100%); height: auto; margin-bottom: 32px; }
-.hyperflite-heading h2 { font-size: clamp(27px, 2.5vw, 34px); line-height: 1.4; font-weight: 700; }
-.hyperflite-story-copy p { max-width: 40em; color: var(--muted); font-size: 16px; line-height: 1.9; }
-.hyperflite-story-copy p:first-child { color: var(--ink); }
-.hyperflite-story-copy p + p { margin-top: 20px; }
-.hyperflite-founders { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 44px; }
-.hyperflite-founders article { padding-top: 28px; border-top: 1px solid var(--line); }
-.hyperflite-founders h3 { font-size: 25px; line-height: 1.4; }
-.hyperflite-founders h3 span { display: block; font-size: 14px; font-weight: 500; color: var(--muted); margin-top: 6px; }
-.hyperflite-founders p { color: var(--muted); font-size: 15px; line-height: 1.9; margin-top: 18px; }
-.brand-design-inner { padding-block: 64px; }
-.brand-design-inner h2 { max-width: 24em; font-size: clamp(27px, 2.8vw, 36px); line-height: 1.4; }
-.brand-design-list { margin-top: 36px; }
-.brand-design-list > div { display: grid; grid-template-columns: 1fr 2fr; gap: 36px; padding-block: 24px; border-top: 1px solid #dfd5e9; }
-.brand-design-list dt { font-size: 20px; font-weight: 650; }
-.brand-design-list dd { max-width: 42em; margin: 0; color: #51445e; font-size: 16px; line-height: 1.9; word-break: keep-all; overflow-wrap: anywhere; }
-.brand-inclusion .brand-source-note { margin-top: 28px; font-size: 12px; line-height: 1.8; }
-.brand-source-note a { text-decoration: underline; text-underline-offset: 3px; }
-.hyperflite-principles { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 48px; }
-.hyperflite-principles h3 { font-size: 22px; line-height: 1.5; font-weight: 700; }
-.hyperflite-principles p { max-width: 36em; margin-top: 16px; color: var(--muted); font-size: 15px; line-height: 1.9; }
-.brand-inclusion { display: grid; grid-template-columns: .95fr 1.05fr; gap: 64px; align-items: start; padding-block: 80px; }
-.brand-inclusion h2 { font-size: 32px; line-height: 1.4; font-weight: 700; }
-.brand-inclusion p { max-width: 36em; color: var(--muted); font-size: 15px; line-height: 1.9; }
-.brand-inclusion .brand-inclusion-lead { margin-bottom: 20px; color: var(--ink); font-size: 19px; line-height: 1.8; font-weight: 550; }
+.brand-intro-logo { width: min(270px, 100%); height: auto; margin-bottom: 30px; }
+.brand-welcome h1 { font-size: clamp(36px, 3.6vw, 54px); font-weight: 750; line-height: 1.28; }
+.brand-welcome h1 span { color: var(--brand-navy); }
+.brand-welcome p { max-width: 34em; margin-top: 25px; color: var(--muted); font-size: 17px; line-height: 1.85; }
+.brand-field-photo { display: block; width: 100%; height: auto; aspect-ratio: 800 / 502; object-fit: contain; }
+.brand-design { background: var(--soft); }
+.brand-design-inner { display: grid; grid-template-columns: .92fr 1.08fr; gap: 64px; padding-block: 72px; }
+.brand-design h2,
+.brand-relationship h2,
+.brand-founders h2 { font-size: clamp(29px, 2.7vw, 40px); line-height: 1.4; font-weight: 750; }
+.brand-design h2 { color: var(--brand-navy); }
+.brand-design-list { margin: 0; }
+.brand-design-list > div { padding-block: 24px; border-top: 1px solid var(--line); }
+.brand-design-list > div:first-child { border-top: 0; padding-top: 0; }
+.brand-design-list > div:last-child { padding-bottom: 0; }
+.brand-design-list dt { font-size: 21px; font-weight: 700; color: var(--brand-navy); }
+.brand-design-list dd { margin: 9px 0 0; max-width: 40em; color: var(--muted); font-size: 16px; line-height: 1.85; }
+.brand-relationship { padding-block: 88px; }
+.brand-roles { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 40px; }
+.brand-roles article { min-width: 0; border-top: 1px solid var(--line); padding-top: 26px; }
+.brand-roles h3 { color: var(--brand-navy); font-family: var(--display); font-size: clamp(38px, 3.7vw, 52px); font-weight: 700; line-height: 1; }
+.brand-roles .brand-role { margin-top: 15px; color: var(--ink); font-size: 21px; font-weight: 650; line-height: 1.5; }
+.brand-roles p { max-width: 35em; color: var(--muted); margin-top: 14px; font-size: 16px; line-height: 1.85; }
+.brand-shared-purpose { margin-top: 38px; color: var(--brand-navy); font-size: 18px; font-weight: 550; line-height: 1.8; }
+.brand-sponsorship { padding-block: 72px 68px; background: var(--brand-navy); color: var(--paper); }
+.brand-sponsorship h2 { max-width: 25em; font-size: clamp(28px, 3vw, 42px); font-weight: 700; line-height: 1.5; }
+.brand-sponsorship-intro { margin-top: 20px; color: #d3def5; font-size: 15px; line-height: 1.8; }
+.brand-posters { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 38px; }
+.brand-posters figure { min-width: 0; margin: 0; }
+.brand-posters a { display: block; background: var(--paper); }
+.brand-posters a:focus-visible { outline-color: var(--paper); }
+.brand-posters img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: contain; transition: opacity .2s; }
+.brand-posters a:hover img { opacity: .92; }
+.brand-posters figcaption { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; margin-top: 16px; font-size: 15px; line-height: 1.7; }
+.brand-posters figcaption strong { font-weight: 600; }
+.brand-posters figcaption span { color: #d3def5; font-size: 12px; }
+.brand-founders { padding-block: 80px 68px; }
+.brand-founders-intro { margin-top: 20px; max-width: 58em; color: var(--muted); font-size: 16px; line-height: 1.85; }
+.hyperflite-founders { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; margin-top: 36px; }
+.hyperflite-founders article { padding-top: 24px; border-top: 1px solid var(--line); }
+.hyperflite-founders h3 { font-size: 23px; font-weight: 700; line-height: 1.4; }
+.hyperflite-founders h3 span { display: block; margin-top: 5px; color: var(--muted); font-size: 13px; font-weight: 500; letter-spacing: 0; }
+.hyperflite-founders p { margin-top: 16px; color: var(--muted); font-size: 15px; line-height: 1.85; }
+.brand-sources { border-top: 1px solid var(--line); padding-block: 26px 40px; color: var(--muted); font-size: 12px; line-height: 1.8; }
+.brand-source-links { display: flex; flex-wrap: wrap; gap: 6px 24px; margin-top: 9px; }
+.brand-source-links a { display: inline-block; padding-block: 4px; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.brand-source-links a:hover { color: var(--accent); }
+@media (prefers-reduced-motion: reduce) {
+  .brand-posters img { transition: none; }
+}
 @media (max-width: 1100px) {
-  .brand-welcome, .brand-inclusion { gap: 36px; }
-  .brand-values-inner { gap: 40px; }
-  .hyperflite-story { gap: 36px; }
-  .hyperflite-principles { gap: 40px; }
+  .brand-welcome,
+  .brand-design-inner,
+  .brand-roles { gap: 40px; }
+  .hyperflite-founders { gap: 28px; }
 }
 @media (max-width: 900px) {
-  .brand-welcome { grid-template-columns: 1fr; gap: 32px; padding-block: 44px 48px; }
-  .brand-welcome h1 { font-size: 44px; }
-  .brand-welcome p { max-width: 40em; }
+  .brand-welcome { grid-template-columns: 1fr; gap: 36px; padding-block: 48px 56px; }
+  .brand-welcome h1 { font-size: clamp(36px, 5.6vw, 48px); }
+  .brand-welcome p { max-width: 42em; }
   .brand-field-photo { max-width: 800px; }
-  .brand-inclusion { grid-template-columns: 1fr; gap: 28px; }
-  .brand-inclusion { padding-block: 56px; }
-  .brand-inclusion p { max-width: none; }
-  .brand-hyperflite { padding-block: 0 48px; }
-  .hyperflite-story { grid-template-columns: 1fr; gap: 28px; }
-  .hyperflite-story-copy p { max-width: none; }
+  .brand-design-inner { grid-template-columns: 1fr; gap: 32px; padding-block: 52px; }
+  .brand-design-list > div { display: grid; grid-template-columns: 1fr 1.7fr; gap: 28px; }
+  .brand-design-list dd { margin: 0; }
+  .brand-relationship { padding-block: 56px; }
+  .brand-roles { gap: 32px; }
+  .brand-sponsorship { padding-block: 52px; }
+  .brand-posters { gap: 24px; }
+  .brand-founders { padding-block: 56px; }
+  .hyperflite-founders { grid-template-columns: 1fr; gap: 24px; }
+  .hyperflite-founders article { display: grid; grid-template-columns: 1fr 1.7fr; gap: 28px; }
+  .hyperflite-founders p { margin-top: 0; max-width: 40em; }
 }
 @media (max-width: 600px) {
-  .hyperflite-founders { grid-template-columns: 1fr; gap: 28px; margin-top: 32px; }
-  .hyperflite-founders h3 { font-size: 23px; }
-  .brand-design-inner { padding-block: 40px; }
-  .brand-design-list { margin-top: 28px; }
-  .brand-design-list > div { grid-template-columns: 1fr; gap: 12px; padding-block: 22px; }
+  .brand-welcome { padding-block: 36px 44px; gap: 28px; }
+  .brand-intro-logo { width: min(220px, 100%); margin-bottom: 26px; }
+  .brand-welcome h1 { font-size: clamp(29px, 7.5vw, 42px); line-height: 1.35; }
+  .brand-welcome p { margin-top: 20px; font-size: 15px; }
+  .brand-design-inner { padding-block: 40px; gap: 28px; }
+  .brand-design h2,
+  .brand-relationship h2,
+  .brand-founders h2 { font-size: 27px; }
+  .brand-design-list > div { display: block; padding-block: 22px; }
   .brand-design-list dt { font-size: 19px; }
-  .brand-design-list dd { font-size: 15px; }
-  .brand-welcome { padding-block: 32px 40px; gap: 28px; }
-  .brand-welcome h1 { font-size: clamp(30px, 7.8vw, 40px); line-height: 1.35; }
-  .brand-welcome p { margin-top: 20px; font-size: 15px; line-height: 1.85; }
-  .brand-welcome p br { display: none; }
-  .brand-values-inner { grid-template-columns: 1fr; gap: 40px; padding-block: 40px; }
-  .brand-values h2, .brand-inclusion h2 { font-size: 27px; }
-  .brand-values p { margin-top: 18px; font-size: 15px; }
-  .brand-values p + p { margin-top: 14px; }
-  .brand-values p br { display: none; }
-  .brand-inclusion { padding-block: 44px; gap: 24px; }
-  .brand-inclusion .brand-inclusion-lead { font-size: 17px; margin-bottom: 16px; }
-  .brand-inclusion p { font-size: 14px; }
-  .brand-inclusion p br { display: none; }
-  .brand-hyperflite { padding-block: 0 40px; }
-  .hyperflite-heading img { width: min(240px, 100%); margin-bottom: 26px; }
-  .hyperflite-heading h2 { font-size: 27px; }
-  .hyperflite-story-copy p { font-size: 15px; }
-  .hyperflite-story-copy p + p { margin-top: 16px; }
-  .hyperflite-principles { grid-template-columns: 1fr; gap: 28px; margin-top: 32px; }
-  .hyperflite-principles h3 { font-size: 21px; }
-  .hyperflite-principles p { font-size: 14px; margin-top: 12px; }
-  .hyperflite-principles p br { display: none; }
+  .brand-design-list dd { margin-top: 8px; font-size: 15px; }
+  .brand-relationship { padding-block: 44px; }
+  .brand-roles { grid-template-columns: 1fr; gap: 28px; margin-top: 28px; }
+  .brand-roles article { padding-top: 22px; }
+  .brand-roles h3 { font-size: 40px; }
+  .brand-roles .brand-role { margin-top: 12px; font-size: 19px; }
+  .brand-roles p { margin-top: 10px; font-size: 15px; }
+  .brand-shared-purpose { margin-top: 28px; font-size: 16px; }
+  .brand-sponsorship { padding-block: 40px; }
+  .brand-sponsorship h2 { font-size: 26px; }
+  .brand-sponsorship-intro { margin-top: 18px; font-size: 13px; }
+  .brand-posters { grid-template-columns: 1fr; gap: 32px; margin-top: 26px; }
+  .brand-posters figcaption { margin-top: 12px; font-size: 14px; }
+  .brand-founders { padding-block: 44px; }
+  .brand-founders-intro { margin-top: 18px; font-size: 15px; }
+  .hyperflite-founders { margin-top: 28px; }
+  .hyperflite-founders article { display: block; padding-top: 22px; }
+  .hyperflite-founders h3 { font-size: 22px; }
+  .hyperflite-founders p { margin-top: 14px; font-size: 14px; }
+  .brand-sources { padding-block: 24px 32px; }
+  .brand-source-links { display: grid; gap: 4px; justify-items: start; }
 }
-
-@media (max-width: 600px) { .brand-intro-logo { width: min(240px, 100%); margin-bottom: 24px; } }

@@ -1,44 +1,61 @@
-/* Product-first extension of the existing Hyperflite preview. */
+/* Hyperflite home: play, reviews, four discs, selection guide, community. */
 [data-page="home"] p { word-break: keep-all; overflow-wrap: anywhere; }
-.hyperflite-home-hero h1 { font-size: clamp(58px, 6.8vw, 96px); line-height: .95; }
-.hyperflite-home-hero .hero-korean { font-size: clamp(21px, 2.1vw, 29px); }
-.hyperflite-home-hero .hero-description { max-width: 34em; }
-.home-series-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 24px; }
-.home-series { display: block; min-width: 0; color: var(--ink); }
-.home-series-photo { display: grid; place-items: center; aspect-ratio: 1; background: var(--soft); overflow: hidden; }
-.home-series-photo img { width: 74%; height: 74%; object-fit: contain; mix-blend-mode: multiply; transition: transform .25s ease-out; }
-.home-series:hover .home-series-photo img { transform: scale(1.035); }
-.home-series h3 { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; font-size: 23px; }
-.home-series h3 svg { width: 21px; height: 21px; flex-shrink: 0; }
-.home-series p { margin-top: 6px; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.home-selection { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; padding-block: 48px; margin-top: 56px; border-top: 1px solid var(--line); }
-.home-selection h3 { font-size: 24px; line-height: 1.45; }
-.home-selection p { color: var(--muted); font-size: 15px; line-height: 1.85; max-width: 40em; margin-block: 16px 20px; }
-.home-origin { background: var(--soft); }
-.home-origin-layout { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 64px; }
-.home-origin img { display: block; width: 100%; height: auto; }
-.home-origin h2 { font-size: clamp(30px, 3vw, 42px); line-height: 1.4; }
-.home-origin p { max-width: 38em; color: var(--muted); font-size: 16px; line-height: 1.9; margin-block: 24px; }
-.home-sport-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px; margin-top: 32px; }
-.home-sport-links a { display: block; padding-top: 24px; border-top: 1px solid var(--line); }
-.home-sport-links h3 { font-size: 22px; line-height: 1.4; }
-.home-sport-links p { margin-block: 14px 20px; color: var(--muted); font-size: 14px; line-height: 1.8; }
-@media (max-width: 900px) {
-  .home-series-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .home-origin-layout { gap: 36px; }
-  .home-sport-links { gap: 24px; }
-}
-@media (max-width: 600px) {
-  .hyperflite-home-hero h1 { font-size: clamp(48px, 12vw, 72px); }
-  .home-series-grid { gap: 28px 14px; }
-  .home-series h3 { font-size: 20px; margin-top: 14px; }
-  .home-series p { font-size: 12px; line-height: 1.7; }
-  .home-selection { grid-template-columns: 1fr; gap: 32px; margin-top: 36px; padding-block: 32px 0; }
-  .home-selection h3 { font-size: 22px; }
-  .home-selection p { font-size: 14px; }
-  .home-origin-layout { grid-template-columns: 1fr; gap: 28px; }
-  .home-origin p { font-size: 15px; margin-block: 20px; }
-  .home-sport-links { grid-template-columns: 1fr; gap: 28px; }
-  .home-sport-links p { margin-block: 12px 16px; }
-}
-@media (prefers-reduced-motion: reduce) { .home-series-photo img { transition: none; } }
+.home-hero { display:grid; grid-template-columns:1fr 1fr; min-height:550px; background:var(--brand-navy); color:white; }
+.home-hero-copy { align-self:center; padding:72px max(40px,calc((100vw - 1360px)/2)); padding-right:40px; }
+.home-hero h1 { font-size:clamp(40px,4.5vw,64px); line-height:1.25; letter-spacing:-.04em; font-weight:750; }
+.home-hero-copy p { margin-top:26px; color:#e0e8f6; font-size:16px; line-height:1.9; }
+.home-shop-button { margin-top:32px; min-height:54px; padding-inline:26px; }
+.home-hero-photo { min-width:0; }
+.home-hero-photo img { width:100%; height:100%; object-fit:cover; object-position:54% center; }
+.home-reviews { padding-block:48px; border-bottom:1px solid var(--line); }
+.home-reviews-heading { display:flex; gap:16px 28px; justify-content:space-between; align-items:baseline; }
+.home-reviews h2 { font-size:23px; line-height:1.5; letter-spacing:-.025em; }
+.home-reviews-heading p { color:var(--muted); font-size:12px; }
+.home-review-quotes { display:grid; grid-template-columns:1fr 1fr; gap:48px; margin-top:24px; }
+.home-review-quotes figure { margin:0; }
+.home-review-quotes blockquote { margin:0; max-width:30em; font-size:19px; line-height:1.8; font-weight:550; }
+.home-review-quotes figcaption { display:flex; gap:14px; flex-wrap:wrap; margin-top:16px; font-size:12px; color:var(--muted); }
+.home-review-quotes figcaption strong { color:var(--ink); font-weight:650; }
+.home-review-source { margin-top:26px; font-size:11px; color:var(--muted); }
+.home-review-source a { text-decoration:underline; text-underline-offset:3px; }
+.home-featured .section-heading { margin-bottom:32px; }
+.home-disc-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:24px; }
+.home-disc { display:flex; flex-direction:column; min-width:0; padding:0; border:0; background:transparent; color:var(--ink); text-align:left; }
+.home-disc-image { display:grid; place-items:center; width:100%; aspect-ratio:1; background:var(--soft); overflow:hidden; }
+.home-disc-image img { width:77%; height:77%; object-fit:contain; mix-blend-mode:multiply; transition:transform .4s var(--ease); }
+.home-disc:hover .home-disc-image img { transform:translateY(-5px) rotate(-4deg); }
+.home-disc-model { font-size:13px; font-weight:650; color:var(--brand-navy); margin-top:22px; }
+.home-disc > strong { font-size:21px; line-height:1.4; margin-top:3px; min-height:2.8em; overflow-wrap:anywhere; word-break:normal; }
+.home-disc-description { font-size:13px; line-height:1.7; color:var(--muted); margin-top:8px; min-height:3.4em; }
+.home-disc-spec { font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums; margin-top:6px; }
+.home-disc-action { display:flex; align-items:center; justify-content:space-between; width:100%; padding-top:16px; margin-top:18px; border-top:1px solid var(--line); font-size:13px; font-weight:650; }
+.home-disc-action svg { width:18px; height:18px; }
+.home-disc:hover .home-disc-action { color:var(--accent); }
+.home-product-note { margin-top:28px; font-size:12px; color:var(--muted); }
+.home-guide { background:var(--soft); }
+.home-guide-inner { display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:72px; padding-block:72px; }
+.home-guide p { margin-block:22px 28px; font-size:15px; color:var(--muted); line-height:1.9; }
+.home-guide-visual { min-width:0; }
+.home-guide-discs { display:flex; align-items:flex-end; justify-content:center; gap:2%; }
+.home-guide-discs img { width:36%; object-fit:contain; mix-blend-mode:multiply; }
+.home-guide-discs img:nth-child(2) { width:31.5%; }
+.home-guide-discs img:nth-child(3) { width:25.2%; }
+.home-guide-visual p { margin:25px 0 0; text-align:center; font-size:12px; }
+.home-field-grid { display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:36px; }
+.home-clubs { min-width:0; background:var(--brand-navy); color:white; }
+.home-clubs > img { width:100%; aspect-ratio:2; object-fit:cover; }
+.home-clubs > div { padding:32px; }
+.home-field h3 { font-size:28px; line-height:1.4; letter-spacing:-.025em; }
+.home-field p { margin-top:18px; font-size:14px; line-height:1.85; }
+.home-clubs p { color:#e0e8f6; }
+.home-field .text-link { margin-top:22px; }
+.home-clubs .text-link:hover { color:#ffd4d6; }
+.home-competition { display:flex; flex-direction:column; align-items:flex-start; padding:40px; background:var(--soft); }
+.home-competition > img { width:210px; height:auto; margin-bottom:42px; }
+.home-competition h3 { font-size:36px; }
+.home-competition p { color:var(--muted); }
+.home-competition .text-link { margin-top:auto; padding-top:30px; }
+@media(max-width:1100px){.home-hero{min-height:500px}.home-hero-copy{padding:48px 36px}.home-hero-copy p{font-size:14px}.home-disc-grid{gap:18px}.home-disc>strong{font-size:19px}.home-guide-inner{gap:36px}}
+@media(max-width:760px){.home-hero{grid-template-columns:1fr}.home-hero-copy{padding:44px 24px}.home-hero h1{font-size:clamp(34px,7vw,48px)}.home-hero-photo{height:310px}.home-hero-photo img{object-position:center 45%}.home-reviews{padding-block:32px}.home-reviews-heading{display:block}.home-reviews h2{font-size:20px}.home-reviews-heading p{margin-top:8px}.home-review-quotes{gap:24px}.home-review-quotes blockquote{font-size:16px}.home-disc-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 18px}.home-guide-inner{grid-template-columns:1fr;gap:36px;padding-block:48px}.home-guide-visual{max-width:500px;width:100%;margin-inline:auto}.home-field-grid{grid-template-columns:1fr;gap:24px}.home-competition{min-height:360px}.home-competition>img{margin-bottom:28px}}
+@media(max-width:420px){.home-hero-copy{padding-inline:22px}.home-desktop-break{display:none}.home-hero-photo{height:260px}.home-review-quotes{grid-template-columns:1fr}.home-review-quotes figure+figure{padding-top:22px;border-top:1px solid var(--line)}.home-disc-grid{gap:30px 14px}.home-disc>strong{font-size:17px}.home-disc-description{font-size:12px}.home-disc-spec{font-size:11px}.home-disc-model{margin-top:16px}.home-clubs>div,.home-competition{padding:28px 24px}.home-field h3{font-size:26px}.home-competition h3{font-size:32px}}
+@media(prefers-reduced-motion:reduce){.home-disc-image img{transition:none}}
