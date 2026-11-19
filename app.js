@@ -183,8 +183,9 @@
     }
 
     function requestNote(selected) {
+      if (!requestStorageAvailable) return '현재 화면에만 선택이 유지됩니다. 실제 요청은 전송되지 않습니다.';
       const note = selected ? '이 브라우저에 저장했어요. 실제 요청은 전송되지 않습니다.' : '선택은 이 브라우저에만 저장됩니다.';
-      return requestStorageAvailable ? note : `${note} 브라우저 저장이 차단되어 새로고침하면 선택이 유지되지 않을 수 있어요.`;
+      return note;
     }
 
     function renderStockRequest(product) {
