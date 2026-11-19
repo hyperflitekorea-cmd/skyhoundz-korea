@@ -7,11 +7,11 @@
   if (!viewport || !track) return;
 
   const cards = [...track.children];
-  const controls = section.querySelector('.review-controls');
-  const toggle = section.querySelector('[data-review-toggle]');
-  const status = section.querySelector('.review-status');
+  if (!cards.length) return;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let paused = reducedMotion.matches;
+  let interacting = false;
+  let touching = false;
+  let resumeTimer = 0;
   let hovered = false;
   let focused = false;
   let visible = false;
@@ -27,11 +27,10 @@
     copy.inert = true;
     track.append(copy);
   }
-  controls.hidden = false;
   section.classList.add('reviews-enhanced');
 
   function canPlay() {
-    return !paused && !hovered && !focused && visible && !document.hidden
+    return !reducedMotion.matches && !interacting && !hovered && !focused && visible && !document.hidden
       && !section.closest('[data-page]').hidden && cycleWidth > 0;
   }
 
@@ -48,8 +47,6 @@
   function update() {
     cancelAnimationFrame(frame);
     frame = 0;
-    toggle.textContent = paused ? '자동 재생' : '일시정지';
-    toggle.setAttribute('aria-label', paused ? '리뷰 자동 이동 시작' : '리뷰 자동 이동 일시정지');
     section.dataset.playing = String(canPlay());
     if (canPlay()) {
       offset = viewport.scrollLeft % cycleWidth;
@@ -67,43 +64,66 @@
     update();
   }
 
-  function move(direction) {
-    paused = true;
+  function resumeAfterInteraction() {
+    clearTimeout(resumeTimer);
+    if (touching) return;
+    resumeTimer = window.setTimeout(() => {
+      interacting = false;
+      update();
+    }, 2500);
+  }
+
+  function pauseForInteraction() {
+    interacting = true;
     update();
+    resumeAfterInteraction();
+  }
+
+  function move(direction) {
+    pauseForInteraction();
+    if (cards.length < 2 || !cycleWidth) return;
     const step = cards[1].offsetLeft - cards[0].offsetLeft;
     let current = viewport.scrollLeft % cycleWidth;
     if (direction < 0 && current < step) current += cycleWidth;
     viewport.scrollLeft = current;
     const destination = Math.round(current / step) + direction;
     viewport.scrollTo({ left: destination * step, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
-    status.textContent = `${cards.length}개 리뷰 중 ${((destination % cards.length) + cards.length) % cards.length + 1}번째`;
   }
-
-  toggle.addEventListener('click', () => {
-    paused = !paused;
-    // Explicitly starting playback takes precedence over control focus.
-    if (!paused) focused = false;
-    update();
-  });
-  section.querySelector('[data-review-prev]').addEventListener('click', () => move(-1));
-  section.querySelector('[data-review-next]').addEventListener('click', () => move(1));
 
   viewport.addEventListener('pointerenter', (event) => {
     if (event.pointerType === 'mouse') { hovered = true; update(); }
   });
   viewport.addEventListener('pointerleave', () => { hovered = false; update(); });
   viewport.addEventListener('pointerdown', (event) => {
-    if (event.pointerType !== 'mouse') { paused = true; update(); }
+    focused = false;
+    if (event.pointerType !== 'mouse') {
+      touching = true;
+      pauseForInteraction();
+    }
   });
-  viewport.addEventListener('wheel', () => { paused = true; update(); }, { passive: true });
+  function endTouch() {
+    if (!touching) return;
+    touching = false;
+    resumeAfterInteraction();
+  }
+  window.addEventListener('pointerup', endTouch);
+  window.addEventListener('pointercancel', endTouch);
+  viewport.addEventListener('wheel', pauseForInteraction, { passive: true });
   viewport.addEventListener('scroll', () => {
     if (!canPlay()) offset = viewport.scrollLeft;
+    // Let touch momentum settle before restarting the automatic movement.
+    if (interacting) resumeAfterInteraction();
   }, { passive: true });
-  section.addEventListener('focusin', () => { focused = true; update(); });
+  section.addEventListener('focusin', () => {
+    focused = viewport.matches(':focus-visible');
+    update();
+  });
   section.addEventListener('focusout', (event) => {
     if (!section.contains(event.relatedTarget)) { focused = false; update(); }
   });
   viewport.addEventListener('keydown', (event) => {
+    focused = true;
+    update();
     if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
       event.preventDefault();
       move(event.key === 'ArrowLeft' ? -1 : 1);
@@ -111,10 +131,7 @@
   });
   document.addEventListener('visibilitychange', update);
   window.addEventListener('hashchange', update);
-  reducedMotion.addEventListener('change', () => {
-    if (reducedMotion.matches) paused = true;
-    update();
-  });
+  reducedMotion.addEventListener('change', update);
   new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting;
     update();
