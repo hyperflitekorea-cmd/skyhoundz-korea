@@ -183,7 +183,7 @@
     }
 
     function requestNote(selected) {
-      const note = selected ? '시안에서 선택했어요. 실제 요청은 전송되지 않습니다.' : '시안용 선택 · 실제 요청은 전송되지 않습니다.';
+      const note = selected ? '이 브라우저에 저장했어요. 실제 요청은 전송되지 않습니다.' : '선택은 이 브라우저에만 저장됩니다.';
       return requestStorageAvailable ? note : `${note} 브라우저 저장이 차단되어 새로고침하면 선택이 유지되지 않을 수 있어요.`;
     }
 
@@ -361,11 +361,11 @@
           <h2 id="product-title">${product.name}</h2>
           <p class="product-material">${product.isGoods ? 'SKYHOUNDZ KOREA' : 'HYPERFLITE'} / ${product.material}</p>
           <p class="product-dialog-description">${product.description}</p>
-          ${product.isGoods ? '<p class="product-dialog-note">판매 준비 중</p>' : `<dl class="product-dialog-specs">
+          ${product.isGoods ? '' : `<dl class="product-dialog-specs">
             <div><dt>지름</dt><dd>${product.size}</dd></div>
             <div><dt>무게</dt><dd>${product.weight}</dd></div>
           </dl>
-          <p class="product-dialog-note">국내 판매가와 입고 일정은 오픈 시 안내합니다.</p>
+
           ${product.requestOnly ? renderStockRequest(product) : `<form class="product-options" id="product-options-form" data-product-id="${product.id}">
             <p class="product-color-note"><strong>색상</strong> 현재 이미지는 대표 색상입니다. 판매 색상은 입고 시 안내합니다.</p>
             <label for="product-quantity">수량</label>
@@ -374,13 +374,13 @@
               <input id="product-quantity" name="quantity" type="number" inputmode="numeric" min="1" max="99" step="1" value="1" required>
               <button type="button" data-quantity-step="1" aria-label="수량 늘리기">+</button>
             </div>
-            <p class="product-price">판매가 공개 예정</p>
+
             <div class="product-purchase-actions"><button class="button button-primary" type="submit">장바구니 담기 ${arrow}</button></div>
             <p class="product-feedback" id="product-feedback" role="status" aria-live="polite"></p>
             <button class="text-link" type="button" data-open-cart hidden id="product-view-cart">장바구니 보기 ${arrow}</button>
-            <p class="product-cart-note">장바구니에 선택한 원반을 보관할 수 있어요. 판매가와 입고 일정 확정 전에는 결제할 수 없습니다.</p>
+            <p class="product-cart-note">담은 제품은 이 브라우저에 저장됩니다. 현재 결제는 지원하지 않습니다.</p>
           </form>`}
-          <a class="text-link" href="${product.source}" target="_blank" rel="noopener noreferrer">Hyperflite 공식 제품 정보 ${arrow}<span class="sr-only"> (새 창)</span></a>`}
+          `}
         </div>
       `;
       productDialog.setAttribute('aria-labelledby', 'product-title');
@@ -424,7 +424,7 @@
               const product = getProduct(item.id);
               return `<article class="cart-item">
                 <button class="cart-item-image" type="button" data-product="${product.id}" aria-label="${product.name} 구매 옵션"><img src="${product.image}" alt="" width="130" height="130"></button>
-                <div class="cart-item-info"><h3>${product.name}</h3><p>${product.size} / ${product.weight}</p><p class="product-price">판매가 공개 예정</p><p class="cart-color-note">판매 색상 추후 안내</p></div>
+                <div class="cart-item-info"><h3>${product.name}</h3><p>${product.size} / ${product.weight}</p><p class="cart-color-note">판매 색상 추후 안내</p></div>
                 <div class="cart-item-controls">
                   <label class="sr-only" for="cart-quantity-${product.id}">${product.name} 수량</label>
                   <div class="quantity-control">
@@ -437,7 +437,7 @@
               </article>`;
             }).join('')}
           </div>
-          <div class="cart-summary"><p><strong>총 ${count}개</strong><span>판매가 공개 예정</span></p><p class="cart-note">판매가와 입고 일정이 확정되면 구매할 수 있습니다. 현재는 결제가 진행되지 않습니다.</p><p class="cart-note">${storageAvailable ? '담은 제품과 수량은 이 브라우저에 저장됩니다.' : '브라우저 저장소를 사용할 수 없어 현재 화면에서만 장바구니가 유지됩니다.'}</p><div class="cart-actions"><button class="button button-primary" type="button" disabled>판매 준비 중</button><button class="text-link" type="button" data-clear-cart>장바구니 비우기</button></div></div>
+          <div class="cart-summary"><p><strong>총 ${count}개</strong></p><p class="cart-note">현재 결제는 지원하지 않습니다.</p><p class="cart-note">${storageAvailable ? '담은 제품과 수량은 이 브라우저에 저장됩니다.' : '브라우저 저장소를 사용할 수 없어 현재 화면에서만 장바구니가 유지됩니다.'}</p><div class="cart-actions"><button class="button button-primary" type="button" disabled>구매 불가</button><button class="text-link" type="button" data-clear-cart>장바구니 비우기</button></div></div>
           <p class="cart-status" id="cart-status" role="status" aria-live="polite"></p>
         `;
       }
