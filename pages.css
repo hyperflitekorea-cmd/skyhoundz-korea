@@ -49,7 +49,6 @@
 .stock-request{display:grid;gap:10px}
 .stock-request-button{width:100%;min-height:48px;justify-content:space-between;gap:12px}
 .stock-request-button[data-selected="true"]{background:var(--pale);border-color:var(--accent-dark);color:var(--accent-dark)}
-.stock-request-button:hover{border-color:var(--accent-dark);color:var(--accent-dark)}
 .stock-request-button svg{width:20px;height:20px;flex-shrink:0}
 .stock-request-note{font-size:12px;line-height:1.7;color:var(--muted);word-break:keep-all;overflow-wrap:anywhere}
 .product-dialog-info .stock-request{margin-block:24px}
@@ -187,7 +186,6 @@ body.menu-open{position:fixed;inset-inline:0;top:var(--menu-scroll-top);overflow
 .product-card .product-purchase,.product-card .button{margin-top:16px;width:100%;font-size:13px;min-height:44px}
 .product-card .product-price,.product-card .product-availability{font-size:12px;color:var(--muted);margin-top:12px}
 .button-secondary{border:1px solid var(--line);background:white;color:var(--ink)}
-.button-secondary:hover{border-color:var(--ink);background:var(--soft)}
 button:disabled{cursor:not-allowed;opacity:.6;transform:none!important}
 .product-options{margin-top:22px;border-top:1px solid var(--line);padding-top:18px;font-size:13px}
 .product-options label{display:block;font-size:13px;font-weight:600;margin-bottom:8px}
@@ -340,10 +338,10 @@ select:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 @media (max-width: 380px) { .site-header .brand.brand-hyperflite-logo img { width: 116px; } }
 
 /* The SHOP action stays prominent in the main navigation. */
-.desktop-nav .nav-group-shop{background:var(--accent);border-radius:4px;padding-inline:14px 6px;gap:6px;transition:background-color .2s}
-.desktop-nav .nav-group-shop:hover{background:var(--accent-hover)}
+.desktop-nav .nav-group-shop{background:var(--accent);border-radius:4px;padding-inline:14px 6px;gap:6px;transition:box-shadow .25s var(--ease)}
+@media(hover:hover) and (pointer:fine){.desktop-nav .nav-group-shop:hover{box-shadow:0 5px 12px rgba(14,30,58,.14)}}
 .desktop-nav .nav-group-shop>a,.nav-group-shop>.nav-expand{color:var(--on-accent)}
 .desktop-nav .nav-group-shop>a[aria-current=page]{color:var(--on-accent)}
 .desktop-nav .nav-group-shop>a[aria-current=page]:after{background:var(--on-accent);bottom:6px}
-.nav-group-shop>.nav-expand:hover{background:var(--accent-hover)}
+.nav-group-shop>.nav-expand{background:transparent}
 #mobile-nav .mobile-nav-row>a[data-route="shop"]{color:var(--accent-dark);font-weight:750}
