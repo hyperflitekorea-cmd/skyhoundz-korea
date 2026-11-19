@@ -1,0 +1,92 @@
+/* One light sweep around actionable button edges; the resting palette stays fixed. */
+@property --button-orbit-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+:is(.button:is(.button-primary,.button-dark,.button-white),.desktop-nav .nav-group-shop) {
+  position: relative;
+  isolation: isolate;
+}
+
+@supports (background:conic-gradient(from 0deg,transparent,#fff)) and ((mask-composite:exclude) or (-webkit-mask-composite:xor)) {
+  :is(.button:is(.button-primary,.button-dark,.button-white),.desktop-nav .nav-group-shop)::before,
+  :is(.button:is(.button-primary,.button-dark,.button-white),.desktop-nav .nav-group-shop)::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    inset: -2px;
+    padding: 2px;
+    border-radius: 6px;
+    pointer-events: none;
+    opacity: 0;
+    background: conic-gradient(from var(--button-orbit-angle),transparent 0deg 225deg,rgba(255,79,100,.18) 265deg,#ff6d88 307deg,#ffd5df 337deg,#fff 351deg,transparent 360deg);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+  }
+
+  :is(.button:is(.button-primary,.button-dark,.button-white),.desktop-nav .nav-group-shop)::after {
+    z-index: 1;
+    inset: -6px;
+    padding: 7px;
+    border-radius: 10px;
+    filter: blur(3px);
+  }
+
+  /* Keyboard focus has the same bounded accent; existing focus outlines remain. */
+  .button:is(.button-primary,.button-dark,.button-white):not(:disabled):not([aria-disabled=true]):focus-visible::before,
+  .button:is(.button-primary,.button-dark,.button-white):not(:disabled):not([aria-disabled=true]):focus-visible::after,
+  .desktop-nav .nav-group-shop:not([aria-disabled=true]):has(> :is(a,button):focus-visible)::before,
+  .desktop-nav .nav-group-shop:not([aria-disabled=true]):has(> :is(a,button):focus-visible)::after {
+    animation: button-edge-orbit 1.1s linear 1 both;
+  }
+
+  @media (hover:hover) and (pointer:fine) {
+    .button:is(.button-primary,.button-dark,.button-white):not(:disabled):not([aria-disabled=true]):hover::before,
+    .button:is(.button-primary,.button-dark,.button-white):not(:disabled):not([aria-disabled=true]):hover::after,
+    .desktop-nav .nav-group-shop:not([aria-disabled=true]):hover::before,
+    .desktop-nav .nav-group-shop:not([aria-disabled=true]):hover::after {
+      animation: button-edge-orbit 1.1s linear 1 both;
+    }
+  }
+
+  @keyframes button-edge-orbit {
+    0% { --button-orbit-angle: 0deg; opacity: 0; }
+    9% { opacity: 1; }
+    84% { opacity: 1; }
+    100% { --button-orbit-angle: 360deg; opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion:reduce) {
+    .button:is(.button-primary,.button-dark,.button-white):not(:disabled):not([aria-disabled=true]):focus-visible::before,
+    .desktop-nav .nav-group-shop:not([aria-disabled=true]):has(> :is(a,button):focus-visible)::before {
+      animation: none;
+      background: linear-gradient(110deg,#ff4f64,#ffd5df,#ff4f64);
+      opacity: 1;
+    }
+    .button:is(.button-primary,.button-dark,.button-white):not(:disabled):not([aria-disabled=true]):focus-visible::after,
+    .desktop-nav .nav-group-shop:not([aria-disabled=true]):has(> :is(a,button):focus-visible)::after {
+      animation: none;
+      background: linear-gradient(110deg,#ff4f64,#ffd5df,#ff4f64);
+      opacity: .45;
+    }
+  }
+
+  @media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:reduce) {
+    .button:is(.button-primary,.button-dark,.button-white):not(:disabled):not([aria-disabled=true]):hover::before,
+    .desktop-nav .nav-group-shop:not([aria-disabled=true]):hover::before {
+      animation: none;
+      background: linear-gradient(110deg,#ff4f64,#ffd5df,#ff4f64);
+      opacity: 1;
+    }
+    .button:is(.button-primary,.button-dark,.button-white):not(:disabled):not([aria-disabled=true]):hover::after,
+    .desktop-nav .nav-group-shop:not([aria-disabled=true]):hover::after {
+      animation: none;
+      background: linear-gradient(110deg,#ff4f64,#ffd5df,#ff4f64);
+      opacity: .45;
+    }
+  }
+}
