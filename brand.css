@@ -20,6 +20,19 @@
 .hyperflite-story-copy p { max-width: 40em; color: var(--muted); font-size: 16px; line-height: 1.9; }
 .hyperflite-story-copy p:first-child { color: var(--ink); }
 .hyperflite-story-copy p + p { margin-top: 20px; }
+.hyperflite-founders { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 44px; }
+.hyperflite-founders article { padding-top: 28px; border-top: 1px solid var(--line); }
+.hyperflite-founders h3 { font-size: 25px; line-height: 1.4; }
+.hyperflite-founders h3 span { display: block; font-size: 14px; font-weight: 500; color: var(--muted); margin-top: 6px; }
+.hyperflite-founders p { color: var(--muted); font-size: 15px; line-height: 1.9; margin-top: 18px; }
+.brand-design-inner { padding-block: 64px; }
+.brand-design-inner h2 { max-width: 24em; font-size: clamp(27px, 2.8vw, 36px); line-height: 1.4; }
+.brand-design-list { margin-top: 36px; }
+.brand-design-list > div { display: grid; grid-template-columns: 1fr 2fr; gap: 36px; padding-block: 24px; border-top: 1px solid #dfd5e9; }
+.brand-design-list dt { font-size: 20px; font-weight: 650; }
+.brand-design-list dd { max-width: 42em; margin: 0; color: #51445e; font-size: 16px; line-height: 1.9; word-break: keep-all; overflow-wrap: anywhere; }
+.brand-inclusion .brand-source-note { margin-top: 28px; font-size: 12px; line-height: 1.8; }
+.brand-source-note a { text-decoration: underline; text-underline-offset: 3px; }
 .hyperflite-principles { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 48px; }
 .hyperflite-principles h3 { font-size: 22px; line-height: 1.5; font-weight: 700; }
 .hyperflite-principles p { max-width: 36em; margin-top: 16px; color: var(--muted); font-size: 15px; line-height: 1.9; }
@@ -46,6 +59,13 @@
   .hyperflite-story-copy p { max-width: none; }
 }
 @media (max-width: 600px) {
+  .hyperflite-founders { grid-template-columns: 1fr; gap: 28px; margin-top: 32px; }
+  .hyperflite-founders h3 { font-size: 23px; }
+  .brand-design-inner { padding-block: 40px; }
+  .brand-design-list { margin-top: 28px; }
+  .brand-design-list > div { grid-template-columns: 1fr; gap: 12px; padding-block: 22px; }
+  .brand-design-list dt { font-size: 19px; }
+  .brand-design-list dd { font-size: 15px; }
   .brand-welcome { padding-block: 32px 40px; gap: 28px; }
   .brand-welcome h1 { font-size: clamp(30px, 7.8vw, 40px); line-height: 1.35; }
   .brand-welcome p { margin-top: 20px; font-size: 15px; line-height: 1.85; }

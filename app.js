@@ -4,6 +4,16 @@
   const source = 'https://hyperflite.com/discs-overview/';
   // Requested preview buttons only; this is not an inventory declaration.
   const stockRequestProductIds = new Set(['alpha-jawz', 'z-disc-x-comp', 'k-10-frostbite', 'k-10-x-comp']);
+  // Manufacturer formulation descriptions. Model and material remain distinct.
+  // Verified against Hyperflite's official overview on 2026-11-19.
+  const formulationDescriptions = {
+    'competition-standard': '부드럽게 무는 반려견을 위한 탄탄한 기본 경기용 소재입니다. 물에 뜨며, 치아에 의한 관통 저항성은 없습니다.',
+    frostbite: '추운 날씨의 플레이를 위해 개발한 부드러운 소재입니다. 물에 뜨며, 치아에 의한 관통 저항성은 없습니다.',
+    hyperflex: '잘 휘어지는 유연한 소재로, 관통 저항성과 부드러운 촉감을 함께 고려한 원반입니다. 물에는 뜨지 않습니다.',
+    jawz: '강하게 무는 반려견을 고려한 관통 저항 소재입니다. 중간 정도의 단단함을 지니며, 물에는 뜨지 않습니다.',
+    sofflite: '부드럽게 무는 반려견에게 적합한 말랑한 소재입니다. 물에 뜨며, 치아에 의한 관통 저항성은 없습니다.',
+    'x-comp': '장거리 던지기를 위한 단단한 관통 저항 소재입니다. 물에는 뜨지 않습니다.',
+  };
   const existingProducts = [
     {
       id: 'cs',
@@ -78,10 +88,10 @@
       id: existing?.id || `${series.id}-${item.id}`,
       name: `${series.label} ${item.label}`,
       ko: spec.materialKo,
-      material: existing?.material || `${item.label} · ${series.label}`,
+      material: `${item.label} · ${series.label}`,
       size,
       weight: spec.weight,
-      description: existing?.description || `${series.label} 시리즈의 ${item.label} 원반입니다. 지름은 약 ${size}, 무게는 약 ${spec.weight}입니다. 사진은 대표 색상이며 국내 판매 색상과 입고 일정은 추후 안내합니다.`,
+      description: `${series.label} 모델의 ${item.label} 원반입니다. ${formulationDescriptions[item.id]} 지름 ${size}, 무게 ${spec.weight}. 놀이·훈련용 원반이며 씹는 장난감이 아닙니다.${['jawz', 'hyperflex', 'x-comp'].includes(item.id) ? ' 관통 저항성이 있어도 손상될 수 있으므로 상태를 확인하며 사용해 주세요.' : ''}`,
       image: window.SHOP_IMAGES[`${series.id}-${item.id}`],
       family: series.id,
       formulation: item.id,
