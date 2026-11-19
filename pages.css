@@ -340,7 +340,8 @@ select:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 @media (max-width: 380px) { .site-header .brand.brand-hyperflite-logo img { width: 116px; } }
 
 /* The SHOP action stays prominent in the main navigation. */
-.desktop-nav .nav-group-shop{background:var(--accent);border-radius:4px;padding-inline:14px 6px;gap:6px}
+.desktop-nav .nav-group-shop{background:var(--accent);border-radius:4px;padding-inline:14px 6px;gap:6px;transition:background-color .2s}
+.desktop-nav .nav-group-shop:hover{background:var(--accent-hover)}
 .desktop-nav .nav-group-shop>a,.nav-group-shop>.nav-expand{color:var(--on-accent)}
 .desktop-nav .nav-group-shop>a[aria-current=page]{color:var(--on-accent)}
 .desktop-nav .nav-group-shop>a[aria-current=page]:after{background:var(--on-accent);bottom:6px}
