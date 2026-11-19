@@ -1,4 +1,4 @@
-/* One light sweep around actionable button edges; the resting palette stays fixed. */
+/* Continuous edge light on hover, one sweep on keyboard focus; resting colors stay fixed. */
 @property --button-orbit-angle {
   syntax: "<angle>";
   inherits: false;
@@ -49,8 +49,14 @@
     .button:is(.button-primary,.button-dark,.button-white):not(:disabled):not([aria-disabled=true]):hover::after,
     .desktop-nav .nav-group-shop:not([aria-disabled=true]):hover::before,
     .desktop-nav .nav-group-shop:not([aria-disabled=true]):hover::after {
-      animation: button-edge-orbit 1.1s linear 1 both;
+      animation: button-edge-loop 1.1s linear infinite;
+      opacity: 1;
     }
+  }
+
+  @keyframes button-edge-loop {
+    from { --button-orbit-angle: 0deg; }
+    to { --button-orbit-angle: 360deg; }
   }
 
   @keyframes button-edge-orbit {
