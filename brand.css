@@ -4,7 +4,7 @@
 [data-page="brand"] h3 { letter-spacing: -.03em; }
 [data-page="brand"] p,
 [data-page="brand"] dd { word-break: keep-all; overflow-wrap: anywhere; }
-[data-page="brand"] a:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
+[data-page="brand"] a:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 5px; }
 .brand-welcome { display: grid; grid-template-columns: .92fr 1.08fr; gap: 64px; align-items: center; padding-block: 76px 88px; }
 .brand-welcome-copy { min-width: 0; }
 .brand-intro-logo { width: min(270px, 100%); height: auto; margin-bottom: 30px; }
@@ -53,7 +53,7 @@
 .brand-sources { border-top: 1px solid var(--line); padding-block: 26px 40px; color: var(--muted); font-size: 12px; line-height: 1.8; }
 .brand-source-links { display: flex; flex-wrap: wrap; gap: 6px 24px; margin-top: 9px; }
 .brand-source-links a { display: inline-block; padding-block: 4px; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
-.brand-source-links a:hover { color: var(--accent); }
+.brand-source-links a:hover { color: var(--accent-dark); }
 @media (prefers-reduced-motion: reduce) {
   .brand-posters img { transition: none; }
 }

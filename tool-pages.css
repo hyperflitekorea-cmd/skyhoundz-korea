@@ -15,7 +15,7 @@
 .preference-choice small { display: block; color: var(--muted); font-size: 13px; line-height: 1.6; margin-top: 5px; }
 .preference-choice input { width: 20px; height: 20px; margin: 0; accent-color: var(--accent-dark); }
 .preference-choice:has(input:checked) { border-color: var(--accent-dark); background: var(--pale); }
-.preference-choice:has(input:focus-visible) { outline: 3px solid var(--accent); outline-offset: 3px; }
+.preference-choice:has(input:focus-visible) { outline: 3px solid var(--accent-dark); outline-offset: 3px; }
 .finder-form-actions { display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
 .finder-result-jump { display: none; }
 .finder-preview { position: sticky; top: 116px; padding: 24px 32px 30px; background: var(--soft); border-radius: 4px; }
@@ -42,7 +42,7 @@
 .compare-choice img { width: 60px; height: 60px; object-fit: contain; }
 .compare-choice strong { display: block; font-size: 15px; line-height: 1.35; font-weight: 650; overflow-wrap: anywhere; }
 .compare-choice small { display: block; font-size: 11px; color: var(--muted); margin-top: 7px; line-height: 1.5; }
-.compare-choice:has(input:focus-visible) { outline: 3px solid var(--accent); outline-offset: 3px; }
+.compare-choice:has(input:focus-visible) { outline: 3px solid var(--accent-dark); outline-offset: 3px; }
 .compare-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 0 16px; }
 .compare-toolbar > p { font-size: 14px; font-weight: 650; line-height: 1.6; }
 .compare-toolbar > div { display: flex; align-items: center; gap: 20px; }
