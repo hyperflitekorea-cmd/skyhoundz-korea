@@ -24,8 +24,8 @@
 .competition-series-summary { margin-block: 16px; font-size: 15px; line-height: 1.8; color: var(--muted); word-break: keep-all; }
 .competition-series-summary strong { color: var(--ink); font-weight: 650; }
 .competition-quick-list { display: grid; gap: 10px; }
-.competition-quick { background: #f3f6fc; border-radius: 4px; transition: background-color .22s ease-out; }
-.competition-quick[open]:not([data-expanded="false"]) { background: #e6edf7; }
+.competition-quick { background: #f0f9ff; border-radius: 4px; transition: background-color .22s ease-out; }
+.competition-quick[open]:not([data-expanded="false"]) { background: #d8effc; }
 .competition-quick summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px; padding: 14px 18px; font-size: 15px; line-height: 1.6; list-style: none; cursor: pointer; border-radius: 4px; }
 .competition-quick summary::-webkit-details-marker { display: none; }
 .competition-quick summary:hover, .competition-quick[open]:not([data-expanded="false"]) summary { color: var(--accent-dark); }

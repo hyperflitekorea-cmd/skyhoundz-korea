@@ -12,7 +12,7 @@
 .brand-welcome .brand-value { margin-top: 24px; color: var(--ink); font-size: 18px; font-weight: 550; line-height: 1.8; }
 .brand-welcome .brand-intro { max-width: 36em; margin-top: 24px; color: var(--muted); font-size: 16px; line-height: 1.9; }
 .brand-field-photo { display: block; width: 100%; height: auto; aspect-ratio: 800 / 502; object-fit: contain; }
-.brand-design { --brand-tech-blue: #7dd3fc; background: var(--home-deep, #081a38); color: var(--paper); }
+.brand-design { --brand-tech-blue: var(--accent-secondary); background: var(--home-deep, #081a38); color: var(--paper); }
 .brand-design-inner { padding-block: 76px 80px; }
 .brand-design-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 36px; }
 .brand-design h2 { font-size: clamp(38px, 4.6vw, 64px); line-height: 1.2; font-weight: 750; }

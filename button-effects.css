@@ -1,4 +1,16 @@
 /* Continuous edge light on hover, one sweep on keyboard focus; resting colors stay fixed. */
+:root {
+  --button-light-base: var(--accent);
+  --button-light-rgb: 255,79,100;
+  --button-light: #ff6d88;
+  --button-light-soft: #ffd5df;
+}
+:is(.site-header,[data-page="competition"],[data-page="training"]) {
+  --button-light-base: var(--accent-secondary);
+  --button-light-rgb: 125,211,252;
+  --button-light: var(--accent-secondary);
+  --button-light-soft: #dff4ff;
+}
 @property --button-orbit-angle {
   syntax: "<angle>";
   inherits: false;
@@ -21,7 +33,7 @@
     border-radius: 6px;
     pointer-events: none;
     opacity: 0;
-    background: conic-gradient(from var(--button-orbit-angle),transparent 0deg 225deg,rgba(255,79,100,.18) 265deg,#ff6d88 307deg,#ffd5df 337deg,#fff 351deg,transparent 360deg);
+    background: conic-gradient(from var(--button-orbit-angle),transparent 0deg 225deg,rgba(var(--button-light-rgb),.18) 265deg,var(--button-light) 307deg,var(--button-light-soft) 337deg,#fff 351deg,transparent 360deg);
     -webkit-mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
@@ -70,13 +82,13 @@
     .button:is(.button-primary,.button-dark,.button-white):not(:disabled):not([aria-disabled=true]):focus-visible::before,
     .desktop-nav .nav-group-shop:not([aria-disabled=true]):has(> :is(a,button):focus-visible)::before {
       animation: none;
-      background: linear-gradient(110deg,#ff4f64,#ffd5df,#ff4f64);
+      background: linear-gradient(110deg,var(--button-light-base),var(--button-light-soft),var(--button-light-base));
       opacity: 1;
     }
     .button:is(.button-primary,.button-dark,.button-white):not(:disabled):not([aria-disabled=true]):focus-visible::after,
     .desktop-nav .nav-group-shop:not([aria-disabled=true]):has(> :is(a,button):focus-visible)::after {
       animation: none;
-      background: linear-gradient(110deg,#ff4f64,#ffd5df,#ff4f64);
+      background: linear-gradient(110deg,var(--button-light-base),var(--button-light-soft),var(--button-light-base));
       opacity: .45;
     }
   }
@@ -85,13 +97,13 @@
     .button:is(.button-primary,.button-dark,.button-white):not(:disabled):not([aria-disabled=true]):hover::before,
     .desktop-nav .nav-group-shop:not([aria-disabled=true]):hover::before {
       animation: none;
-      background: linear-gradient(110deg,#ff4f64,#ffd5df,#ff4f64);
+      background: linear-gradient(110deg,var(--button-light-base),var(--button-light-soft),var(--button-light-base));
       opacity: 1;
     }
     .button:is(.button-primary,.button-dark,.button-white):not(:disabled):not([aria-disabled=true]):hover::after,
     .desktop-nav .nav-group-shop:not([aria-disabled=true]):hover::after {
       animation: none;
-      background: linear-gradient(110deg,#ff4f64,#ffd5df,#ff4f64);
+      background: linear-gradient(110deg,var(--button-light-base),var(--button-light-soft),var(--button-light-base));
       opacity: .45;
     }
   }
