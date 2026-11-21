@@ -1,115 +1,111 @@
-/* Hyperflite: dog discs, the people behind them, and the sport they support. */
+/* Hyperflite brand: comfort, product engineering, and shared sporting roots. */
 [data-page="brand"] h1,
 [data-page="brand"] h2,
 [data-page="brand"] h3 { letter-spacing: -.03em; }
-[data-page="brand"] p,
-[data-page="brand"] dd { word-break: keep-all; overflow-wrap: anywhere; }
-[data-page="brand"] a:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 5px; }
-.brand-welcome { display: grid; grid-template-columns: .92fr 1.08fr; gap: 64px; align-items: center; padding-block: 76px 88px; }
+[data-page="brand"] p { word-break: keep-all; overflow-wrap: anywhere; }
+[data-page="brand"] a:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
+.brand-welcome { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; padding-block: 76px 88px; }
 .brand-welcome-copy { min-width: 0; }
-.brand-intro-logo { width: min(270px, 100%); height: auto; margin-bottom: 30px; }
-.brand-welcome h1 { font-size: clamp(36px, 3.6vw, 54px); font-weight: 750; line-height: 1.28; }
+.brand-intro-logo { width: min(260px, 100%); height: auto; margin-bottom: 30px; }
+.brand-welcome h1 { font-size: clamp(36px, 3.7vw, 54px); font-weight: 750; line-height: 1.3; }
 .brand-welcome h1 span { color: var(--brand-navy); }
-.brand-welcome p { max-width: 34em; margin-top: 25px; color: var(--muted); font-size: 17px; line-height: 1.85; }
+.brand-welcome .brand-value { margin-top: 24px; color: var(--ink); font-size: 18px; font-weight: 550; line-height: 1.8; }
+.brand-welcome .brand-intro { max-width: 36em; margin-top: 24px; color: var(--muted); font-size: 16px; line-height: 1.9; }
 .brand-field-photo { display: block; width: 100%; height: auto; aspect-ratio: 800 / 502; object-fit: contain; }
-.brand-design { background: var(--soft); }
-.brand-design-inner { display: grid; grid-template-columns: .92fr 1.08fr; gap: 64px; padding-block: 72px; }
-.brand-design h2,
-.brand-relationship h2,
-.brand-founders h2 { font-size: clamp(29px, 2.7vw, 40px); line-height: 1.4; font-weight: 750; }
-.brand-design h2 { color: var(--brand-navy); }
-.brand-design-list { margin: 0; }
-.brand-design-list > div { padding-block: 24px; border-top: 1px solid var(--line); }
-.brand-design-list > div:first-child { border-top: 0; padding-top: 0; }
-.brand-design-list > div:last-child { padding-bottom: 0; }
-.brand-design-list dt { font-size: 21px; font-weight: 700; color: var(--brand-navy); }
-.brand-design-list dd { margin: 9px 0 0; max-width: 40em; color: var(--muted); font-size: 16px; line-height: 1.85; }
+.brand-design { background: var(--home-deep, #081a38); color: var(--paper); }
+.brand-design-inner { padding-block: 76px 80px; }
+.brand-design-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 36px; }
+.brand-design h2 { font-size: clamp(38px, 4.6vw, 64px); line-height: 1.2; font-weight: 750; }
+.brand-design-heading p { color: #cbdcf0; font-size: 16px; line-height: 1.8; }
+.brand-blueprint { margin: 36px 0 32px; }
+.brand-blueprint img { display: block; width: 100%; height: auto; aspect-ratio: 1672 / 941; object-fit: contain; }
+.brand-blueprint figcaption { margin-top: 10px; color: #b8cde7; text-align: right; font-size: 12px; line-height: 1.6; }
+.brand-feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.brand-feature { min-width: 0; padding: 26px; border: 1px solid #355172; border-radius: 14px; background: #112c4b; }
+.brand-model-visual,
+.brand-feature-diagram { display: block; width: 100%; height: 160px; margin-bottom: 26px; color: #dcecff; }
+.brand-model-visual { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.brand-model-visual img { object-fit: contain; height: auto; width: 34%; }
+.brand-model-visual img:nth-child(2) { width: 29.75%; }
+.brand-model-visual img:nth-child(3) { width: 23.8%; }
+.brand-diagram-accent { stroke: var(--accent); }
+.brand-feature h3 { display: flex; align-items: baseline; gap: .14em; min-height: 37px; font-size: clamp(19px, 1.8vw, 24px); line-height: 1.45; font-weight: 700; }
+.brand-feature-count { font-family: var(--display); font-size: 38px; line-height: 1; color: var(--accent); }
+.brand-feature-divider { color: #98b4d5; margin-inline: .2em; font-weight: 400; }
+.brand-feature p { margin-top: 17px; color: #cbdcf0; font-size: 15px; line-height: 1.85; }
 .brand-relationship { padding-block: 88px; }
-.brand-roles { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 40px; }
-.brand-roles article { min-width: 0; border-top: 1px solid var(--line); padding-top: 26px; }
-.brand-roles h3 { color: var(--brand-navy); font-family: var(--display); font-size: clamp(38px, 3.7vw, 52px); font-weight: 700; line-height: 1; }
-.brand-roles .brand-role { margin-top: 15px; color: var(--ink); font-size: 21px; font-weight: 650; line-height: 1.5; }
-.brand-roles p { max-width: 35em; color: var(--muted); margin-top: 14px; font-size: 16px; line-height: 1.85; }
-.brand-shared-purpose { margin-top: 38px; color: var(--brand-navy); font-size: 18px; font-weight: 550; line-height: 1.8; }
-.brand-sponsorship { padding-block: 72px 68px; background: var(--brand-navy); color: var(--paper); }
-.brand-sponsorship h2 { max-width: 25em; font-size: clamp(28px, 3vw, 42px); font-weight: 700; line-height: 1.5; }
-.brand-sponsorship-intro { margin-top: 20px; color: #d3def5; font-size: 15px; line-height: 1.8; }
-.brand-posters { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 38px; }
+.brand-relationship h2 { font-size: clamp(32px, 3.4vw, 46px); line-height: 1.35; font-weight: 750; }
+.brand-relationship-intro { margin-top: 18px; color: var(--muted); font-size: 17px; line-height: 1.8; }
+.brand-posters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; max-width: 880px; margin: 40px auto 56px; }
 .brand-posters figure { min-width: 0; margin: 0; }
-.brand-posters a { display: block; background: var(--paper); }
-.brand-posters a:focus-visible { outline-color: var(--paper); }
-.brand-posters img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: contain; transition: opacity .2s; }
-.brand-posters a:hover img { opacity: .92; }
-.brand-posters figcaption { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; margin-top: 16px; font-size: 15px; line-height: 1.7; }
-.brand-posters figcaption strong { font-weight: 600; }
-.brand-posters figcaption span { color: #d3def5; font-size: 12px; }
-.brand-founders { padding-block: 80px 68px; }
-.brand-founders-intro { margin-top: 20px; max-width: 58em; color: var(--muted); font-size: 16px; line-height: 1.85; }
-.hyperflite-founders { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; margin-top: 36px; }
-.hyperflite-founders article { padding-top: 24px; border-top: 1px solid var(--line); }
-.hyperflite-founders h3 { font-size: 23px; font-weight: 700; line-height: 1.4; }
-.hyperflite-founders h3 span { display: block; margin-top: 5px; color: var(--muted); font-size: 13px; font-weight: 500; letter-spacing: 0; }
-.hyperflite-founders p { margin-top: 16px; color: var(--muted); font-size: 15px; line-height: 1.85; }
-.brand-sources { border-top: 1px solid var(--line); padding-block: 26px 40px; color: var(--muted); font-size: 12px; line-height: 1.8; }
-.brand-source-links { display: flex; flex-wrap: wrap; gap: 6px 24px; margin-top: 9px; }
-.brand-source-links a { display: inline-block; padding-block: 4px; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
-.brand-source-links a:hover { color: var(--accent-dark); }
-@media (prefers-reduced-motion: reduce) {
-  .brand-posters img { transition: none; }
+.brand-posters a { display: block; background: var(--soft); outline: 1px solid var(--line); outline-offset: 0; transition: transform .25s ease; }
+.brand-posters img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: contain; }
+.brand-posters figcaption { margin-top: 14px; font-size: 14px; line-height: 1.7; color: var(--muted); }
+.brand-posters figcaption strong { font-weight: 550; }
+.brand-roles { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.brand-roles article { min-width: 0; border-top: 1px solid var(--line); padding-top: 30px; }
+.brand-roles h3 { color: var(--brand-navy); font-family: var(--display); font-size: clamp(42px, 4vw, 56px); font-weight: 700; line-height: 1; }
+.brand-roles .brand-role { margin-top: 18px; color: var(--ink); font-size: 22px; font-weight: 650; line-height: 1.5; }
+.brand-roles p { color: var(--muted); margin-top: 18px; font-size: 16px; line-height: 1.9; }
+.brand-roles .brand-disc-rule { display: flex; gap: 13px; padding: 20px; margin-top: 26px; border-radius: 12px; background: var(--soft); color: var(--brand-navy); font-size: 14px; line-height: 1.8; }
+.brand-disc-rule svg { width: 21px; height: 21px; flex-shrink: 0; margin-top: 2px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+.brand-disc-rule strong { font-weight: 650; }
+.brand-disc-rule small { display: block; margin-top: 6px; color: var(--muted); font-size: 12px; }
+@media (hover: hover) and (pointer: fine) {
+  .brand-posters a:hover { transform: translateY(-4px); }
 }
 @media (max-width: 1100px) {
-  .brand-welcome,
-  .brand-design-inner,
-  .brand-roles { gap: 40px; }
-  .hyperflite-founders { gap: 28px; }
+  .brand-welcome, .brand-roles { gap: 36px; }
+  .brand-feature { padding: 22px; }
+  .brand-feature-grid { gap: 16px; }
+  .brand-feature h3 { font-size: 19px; }
 }
 @media (max-width: 900px) {
-  .brand-welcome { grid-template-columns: 1fr; gap: 36px; padding-block: 48px 56px; }
-  .brand-welcome h1 { font-size: clamp(36px, 5.6vw, 48px); }
-  .brand-welcome p { max-width: 42em; }
+  .brand-welcome { grid-template-columns: 1fr; gap: 36px; padding-block: 52px 64px; }
+  .brand-welcome h1 { font-size: clamp(38px, 5.6vw, 52px); }
+  .brand-welcome .brand-intro { max-width: 46em; }
   .brand-field-photo { max-width: 800px; }
-  .brand-design-inner { grid-template-columns: 1fr; gap: 32px; padding-block: 52px; }
-  .brand-design-list > div { display: grid; grid-template-columns: 1fr 1.7fr; gap: 28px; }
-  .brand-design-list dd { margin: 0; }
-  .brand-relationship { padding-block: 56px; }
-  .brand-roles { gap: 32px; }
-  .brand-sponsorship { padding-block: 52px; }
-  .brand-posters { gap: 24px; }
-  .brand-founders { padding-block: 56px; }
-  .hyperflite-founders { grid-template-columns: 1fr; gap: 24px; }
-  .hyperflite-founders article { display: grid; grid-template-columns: 1fr 1.7fr; gap: 28px; }
-  .hyperflite-founders p { margin-top: 0; max-width: 40em; }
+  .brand-design-inner { padding-block: 56px; }
+  .brand-design-heading { display: block; }
+  .brand-design-heading p { margin-top: 20px; }
+  .brand-feature-grid { grid-template-columns: 1fr; }
+  .brand-feature { display: grid; grid-template-columns: minmax(180px, .65fr) 1fr; column-gap: 28px; padding: 26px; }
+  .brand-model-visual, .brand-feature-diagram { grid-row: 1 / 3; margin-bottom: 0; align-self: center; }
+  .brand-feature h3 { min-height: 0; font-size: 23px; }
+  .brand-feature p { margin-top: 12px; }
+  .brand-relationship { padding-block: 64px; }
+  .brand-roles { gap: 36px; }
+  .brand-roles .brand-role { font-size: 20px; }
 }
 @media (max-width: 600px) {
   .brand-welcome { padding-block: 36px 44px; gap: 28px; }
   .brand-intro-logo { width: min(220px, 100%); margin-bottom: 26px; }
-  .brand-welcome h1 { font-size: clamp(29px, 7.5vw, 42px); line-height: 1.35; }
-  .brand-welcome p { margin-top: 20px; font-size: 15px; }
-  .brand-design-inner { padding-block: 40px; gap: 28px; }
-  .brand-design h2,
-  .brand-relationship h2,
-  .brand-founders h2 { font-size: 27px; }
-  .brand-design-list > div { display: block; padding-block: 22px; }
-  .brand-design-list dt { font-size: 19px; }
-  .brand-design-list dd { margin-top: 8px; font-size: 15px; }
+  .brand-welcome h1 { font-size: clamp(30px, 7.5vw, 42px); line-height: 1.35; }
+  .brand-welcome .brand-value { margin-top: 22px; font-size: 16px; }
+  .brand-welcome .brand-intro { margin-top: 20px; font-size: 15px; }
+  .brand-design-inner { padding-block: 44px; }
+  .brand-design h2 { font-size: clamp(32px, 8vw, 44px); }
+  .brand-design-heading p { font-size: 14px; margin-top: 18px; }
+  .brand-blueprint { margin-block: 26px; }
+  .brand-blueprint figcaption { font-size: 11px; }
+  .brand-feature { display: block; padding: 24px; }
+  .brand-model-visual, .brand-feature-diagram { height: 150px; margin-bottom: 20px; }
+  .brand-feature h3 { min-height: 0; font-size: 22px; }
+  .brand-feature-count { font-size: 38px; }
+  .brand-feature p { margin-top: 14px; font-size: 15px; }
   .brand-relationship { padding-block: 44px; }
-  .brand-roles { grid-template-columns: 1fr; gap: 28px; margin-top: 28px; }
-  .brand-roles article { padding-top: 22px; }
-  .brand-roles h3 { font-size: 40px; }
-  .brand-roles .brand-role { margin-top: 12px; font-size: 19px; }
-  .brand-roles p { margin-top: 10px; font-size: 15px; }
-  .brand-shared-purpose { margin-top: 28px; font-size: 16px; }
-  .brand-sponsorship { padding-block: 40px; }
-  .brand-sponsorship h2 { font-size: 26px; }
-  .brand-sponsorship-intro { margin-top: 18px; font-size: 13px; }
-  .brand-posters { grid-template-columns: 1fr; gap: 32px; margin-top: 26px; }
-  .brand-posters figcaption { margin-top: 12px; font-size: 14px; }
-  .brand-founders { padding-block: 44px; }
-  .brand-founders-intro { margin-top: 18px; font-size: 15px; }
-  .hyperflite-founders { margin-top: 28px; }
-  .hyperflite-founders article { display: block; padding-top: 22px; }
-  .hyperflite-founders h3 { font-size: 22px; }
-  .hyperflite-founders p { margin-top: 14px; font-size: 14px; }
-  .brand-sources { padding-block: 24px 32px; }
-  .brand-source-links { display: grid; gap: 4px; justify-items: start; }
+  .brand-relationship h2 { font-size: 31px; }
+  .brand-relationship-intro { font-size: 15px; margin-top: 16px; }
+  .brand-posters { gap: 16px; margin-block: 28px 38px; }
+  .brand-posters figcaption { margin-top: 10px; font-size: 12px; }
+  .brand-roles { grid-template-columns: 1fr; gap: 38px; }
+  .brand-roles article { padding-top: 26px; }
+  .brand-roles h3 { font-size: 44px; }
+  .brand-roles .brand-role { margin-top: 15px; font-size: 20px; }
+  .brand-roles p { margin-top: 16px; font-size: 15px; }
+  .brand-roles .brand-disc-rule { padding: 18px; font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-posters a { transition: none; }
+  .brand-posters a:hover { transform: none; }
 }
