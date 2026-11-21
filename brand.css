@@ -12,18 +12,18 @@
 .brand-welcome .brand-value { margin-top: 24px; color: var(--ink); font-size: 18px; font-weight: 550; line-height: 1.8; }
 .brand-welcome .brand-intro { max-width: 36em; margin-top: 24px; color: var(--muted); font-size: 16px; line-height: 1.9; }
 .brand-field-photo { display: block; width: 100%; height: auto; aspect-ratio: 800 / 502; object-fit: contain; }
-.brand-design { background: var(--home-deep, #081a38); color: var(--paper); }
+.brand-design { --brand-tech-blue: #7dd3fc; background: var(--home-deep, #081a38); color: var(--paper); }
 .brand-design-inner { padding-block: 76px 80px; }
 .brand-design-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 36px; }
 .brand-design h2 { font-size: clamp(38px, 4.6vw, 64px); line-height: 1.2; font-weight: 750; }
 .brand-design-heading p { color: #cbdcf0; font-size: 16px; line-height: 1.8; }
 .brand-blueprint { margin: 36px 0 32px; }
-.brand-blueprint img { display: block; width: 100%; height: auto; aspect-ratio: 1672 / 941; object-fit: contain; }
+.brand-blueprint img { display: block; width: 100%; height: auto; aspect-ratio: 1671 / 941; object-fit: contain; }
 .brand-feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .brand-feature { min-width: 0; padding: 26px; border: 1px solid #355172; border-radius: 14px; background: #112c4b; }
 .brand-feature-image { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; margin-bottom: 26px; }
 .brand-feature h3 { display: flex; align-items: baseline; gap: .14em; min-height: 37px; font-size: clamp(19px, 1.8vw, 24px); line-height: 1.45; font-weight: 700; }
-.brand-feature-count { font-family: var(--display); font-size: 38px; line-height: 1; color: var(--accent); }
+.brand-feature-count { font-family: var(--display); font-size: 38px; line-height: 1; color: var(--brand-tech-blue); }
 .brand-feature-divider { color: #98b4d5; margin-inline: .2em; font-weight: 400; }
 .brand-feature p { margin-top: 17px; color: #cbdcf0; font-size: 15px; line-height: 1.85; }
 .brand-relationship { padding-block: 88px; }
