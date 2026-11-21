@@ -37,8 +37,8 @@
   function tick(time) {
     frame = 0;
     if (!canPlay()) return;
-    // 24 CSS pixels per second: roughly 16 seconds for one desktop card.
-    offset = (offset + Math.min(time - lastTime, 50) * 0.024) % cycleWidth;
+    // 48 CSS pixels per second: roughly 8 seconds for one desktop card.
+    offset = (offset + Math.min(time - lastTime, 50) * 0.048) % cycleWidth;
     viewport.scrollLeft = offset;
     lastTime = time;
     frame = requestAnimationFrame(tick);
