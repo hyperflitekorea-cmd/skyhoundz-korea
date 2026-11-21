@@ -31,7 +31,7 @@
 .guide-size-row h3 { font-size:18px; font-weight:650; }
 .guide-size-row p { color:var(--muted); font-size:14px; margin-top:6px; line-height:1.6; }
 .guide-size-models { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
-.guide-size-models a { display:flex; flex-direction:column; gap:7px; padding:16px 18px; background:var(--paper); border:1px solid var(--line); border-radius:4px; min-width:0; }
+.guide-size-models a, .guide-size-model { display:flex; flex-direction:column; gap:7px; padding:16px 18px; background:var(--paper); border:1px solid var(--line); border-radius:4px; min-width:0; }
 .guide-size-models img { display:block; width:88px; height:88px; object-fit:contain; margin:0 auto 10px; }
 .guide-size-models a:hover { background:var(--pale); color:var(--accent-dark); }
 .guide-size-models strong { display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:18px; }
@@ -69,7 +69,7 @@
 .guide-lineup thead th:first-child { z-index:3; }
 .guide-lineup th small { display:block; margin-top:5px; color:var(--muted); font-size:12px; font-weight:400; }
 .guide-lineup td { padding:10px; }
-.guide-lineup td a { display:flex; min-height:92px; align-items:center; justify-content:center; color:var(--accent-dark); border-radius:4px; }
+.guide-lineup td a, .guide-lineup td > span:has(img) { display:flex; min-height:92px; align-items:center; justify-content:center; color:var(--accent-dark); border-radius:4px; }
 .guide-lineup td a:hover { background:var(--pale); }
 .guide-lineup img { width:80px; height:80px; object-fit:contain; }
 .guide-lineup td > span { color:var(--muted); }
@@ -115,7 +115,7 @@
   .guide-section h2 { font-size:25px; }
   .guide-size-row { grid-template-columns:1fr; gap:14px; padding-block:20px; }
   .guide-size-models { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
-  .guide-size-models a { padding:14px; }
+  .guide-size-models a, .guide-size-model { padding:14px; }
   .guide-material-groups, .guide-technology { grid-template-columns:1fr; gap:32px; }
   .guide-material-group { grid-row:auto; grid-template-rows:none; gap:16px; }
   .guide-material { grid-row:auto; grid-template-rows:auto auto auto; gap:18px; padding:20px; }

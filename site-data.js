@@ -12,7 +12,8 @@ window.CLUBS = [
 
 // User-approved hierarchy: SHOP > Hyperflite series > formulation, plus Goods.
 // Formulations verified in https://hyperflite.com/ Discs menu on 2026-11-01.
-// This is a navigation taxonomy, not a confirmed Korean inventory list.
+// Korean SHOP selection updated 2026-11-21: no Macro; Nano Competition Standard only.
+// The full manufacturer lineup remains in DISC_OVERVIEW_SPECS for the guide.
 window.SHOP_MENU = [
   { id: 'alpha', label: 'Alpha', detail: '10″', formulations: ['Competition Standard', 'Jawz'] },
   { id: 'z-disc', label: 'Z-Disc', detail: '9.25″', formulations: ['Competition Standard', 'HyperFlex', 'Jawz', 'X-Comp'] },
@@ -20,8 +21,7 @@ window.SHOP_MENU = [
   { id: 'maxq', label: 'MaxQ', detail: '8.5″', formulations: ['Competition Standard', 'Jawz'] },
   { id: 'z-pup', label: 'Z-Pup', detail: '7.25″', formulations: ['Competition Standard', 'HyperFlex', 'Jawz', 'SofFlite'] },
   { id: 'pup', label: 'Pup', detail: '7″', formulations: ['Competition Standard', 'FrostBite', 'HyperFlex', 'Jawz', 'SofFlite', 'X-Comp'] },
-  { id: 'macro', label: 'Macro', detail: '5″', formulations: ['Competition Standard', 'HyperFlex', 'Jawz'] },
-  { id: 'nano', label: 'Nano', detail: '4″', formulations: ['Competition Standard', 'HyperFlex', 'Jawz'] },
+  { id: 'nano', label: 'Nano', detail: '4″', formulations: ['Competition Standard'] },
   { id: 'goods', label: '굿즈', formulations: [] },
 ].map(({ formulations, ...series }) => ({
   ...series,

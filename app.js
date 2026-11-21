@@ -2,8 +2,8 @@
   'use strict';
 
   const source = 'https://hyperflite.com/discs-overview/';
-  // Requested preview buttons only; this is not an inventory declaration.
-  const stockRequestProductIds = new Set(['alpha-jawz', 'z-disc-x-comp', 'k-10-frostbite', 'k-10-x-comp']);
+  // All Alpha discs and these individual discs use local-only stock request previews.
+  const stockRequestProductIds = new Set(['alpha-competition-standard', 'alpha-jawz', 'z-disc-x-comp', 'k-10-frostbite', 'k-10-x-comp']);
   // Manufacturer formulation descriptions. Model and material remain distinct.
   // Verified against Hyperflite's official overview on 2026-11-19.
   const formulationDescriptions = {
@@ -233,7 +233,8 @@
       const items = Array.isArray(value) ? value : value?.version === 1 && Array.isArray(value.items) ? value.items : [];
       const valid = new Map();
       items.forEach((item) => {
-        if (!item || !getProduct(item.id) || !Number.isInteger(item.quantity) || item.quantity < 1) return;
+        const product = item && getProduct(item.id);
+        if (!product || product.requestOnly || !Number.isInteger(item.quantity) || item.quantity < 1) return;
         valid.set(item.id, Math.min(99, (valid.get(item.id) || 0) + item.quantity));
       });
       return Array.from(valid, ([id, quantity]) => ({ id, quantity }));
@@ -241,7 +242,13 @@
 
     function readCart() {
       try {
-        return sanitizeCart(JSON.parse(localStorage.getItem(cartStorageKey) || '[]'));
+        const saved = localStorage.getItem(cartStorageKey);
+        const items = sanitizeCart(JSON.parse(saved || '[]'));
+        const current = JSON.stringify({ version: 1, items });
+        if (saved && saved !== current) {
+          try { localStorage.setItem(cartStorageKey, current); } catch { storageAvailable = false; }
+        }
+        return items;
       } catch {
         storageAvailable = false;
         return [];
@@ -726,11 +733,19 @@
       const [name, ...segments] = path.split('/');
       if (name === 'guide' && segments[0] === 'compare') return { route: 'compare', sub: '' };
       const route = aliases[name] || name || 'home';
+      if (route === 'shop' && segments[0] === 'family') {
+        const series = shopMenu.find((item) => item.id !== 'goods' && item.id === segments[1]);
+        if (!series) return { route, sub: '', fallbackHash: '#shop' };
+        if (segments.length > 2 && (!series.items.some((item) => item.id === segments[2]) || segments.length > 3)) {
+          return { route, sub: `family-${series.id}`, fallbackHash: shopHref(series) };
+        }
+      }
       return { route: Object.hasOwn(routes, route) ? route : 'home', sub: segments.join('-') };
     }
 
     function renderRoute(initial = false) {
-      const { route, sub } = parseRoute();
+      const { route, sub, fallbackHash } = parseRoute();
+      if (fallbackHash) window.history.replaceState(window.history.state, '', fallbackHash);
       if (route === 'shop') renderProducts(sub);
       document.querySelectorAll('[data-page]').forEach((page) => { page.hidden = page.dataset.page !== route; });
       document.title = routes[route];
