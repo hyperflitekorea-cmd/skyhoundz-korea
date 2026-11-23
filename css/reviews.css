@@ -35,17 +35,22 @@
   border-radius: 14px;
   background: var(--soft);
 }
-.review-card .home-review-stars {
+.review-rating {
   display: flex;
-  gap: 3px;
+  align-items: center;
+  gap: 8px;
   margin-bottom: 20px;
-  color: var(--accent-dark);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
 }
-.review-card .home-review-stars svg {
-  width: 15px;
-  height: 15px;
+.home-review-stars {
+  width: 102px;
+  height: 18px;
+  color: var(--accent);
   fill: currentColor;
-  stroke: none;
+  stroke: var(--brand-green);
+  stroke-width: 1.25;
 }
 .review-body {
   font-size: 16px;
