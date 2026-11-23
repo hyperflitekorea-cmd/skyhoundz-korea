@@ -289,7 +289,9 @@
   border-collapse: separate;
   border-spacing: 0;
 }
+/* Give each product the same share; minimum widths preserve horizontal scrolling. */
 .disc-tools .compare-table thead th:not(:first-child) {
+  width: 100cqi;
   min-width: var(--compare-product-width);
 }
 .disc-tools .compare-table th,
