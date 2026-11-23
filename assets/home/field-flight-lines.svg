@@ -1,59 +1,54 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="600" viewBox="0 0 1600 600" fill="none">
-  <g stroke="#9DBD7E" stroke-width="1.4">
-    <path d="M-186 506C114 554 368 421 672 278S1271 38 1748 72"/>
-    <path d="M-178 520C123 569 380 431 683 289S1281 50 1750 85" opacity=".58"/>
-    <path d="M960 666C1222 523 1489 347 1682 133"/>
-    <path d="M-98 239C45 216 163 144 226 65S264-49 192-52" opacity=".78"/>
-    <path d="M-79 237C57 203 164 135 219 62" opacity=".48"/>
-    <ellipse cx="1494" cy="520" rx="193" ry="49" transform="rotate(-24 1494 520)"/>
-    <path d="M-68 98C153 159 321 144 527 47S736-46 818-51" opacity=".62"/>
-    <path d="M187 630C340 491 540 457 747 480S1018 559 1160 529" opacity=".72"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="600" viewBox="0 0 1600 600">
+  <!-- Uneven silhouettes, each drawn separately. -->
+  <g fill="#80FF00" stroke="none">
+    <path opacity=".084" d="M119-22 C147-6 157 13 182 10 Q194 7 202 19
+      C219 43 228 26 245 34 Q253 38 248 48 C238 61 259 59 268 71
+      C282 91 297 70 316 74 Q326 78 338 70 C359 49 369 56 390 47
+      Q399 42 390 37 C375 30 406 24 409 16 C418-1 442 8 459-22 Z"/>
+    <path opacity=".055" d="M319 92 C326 88 329 95 335 94 Q348 87 350 93
+      C352 102 341 100 332 104 Q316 109 318 102 C321 98 314 98 319 92Z"/>
+    <path opacity=".07" d="M664 181 C681 183 678 168 694 166 Q707 168 716 159
+      C734 141 741 155 751 150 C770 137 777 124 791 129
+      C802 133 797 147 813 142 Q837 134 829 149 C821 166 798 167 795 184
+      C790 196 771 190 761 195 Q748 204 735 201 C716 193 709 215 693 211
+      Q681 204 673 208 C651 219 659 198 648 198 Q638 190 664 181Z"/>
+    <path opacity=".09" d="M842-18 C867 2 891-4 906 20 C922 49 942 34 961 50
+      Q970 60 980 53 C994 40 995 56 1014 53 C1037 49 1040 68 1062 58
+      Q1073 52 1086 57 C1110 66 1130 38 1148 44 Q1156 45 1161 36
+      C1173 15 1206 20 1214 3 Q1216-8 1242-18 Z"/>
+    <path opacity=".06" d="M1528 151 C1545 156 1551 133 1565 141
+      C1576 149 1585 120 1604 125 L1620 244 C1598 251 1587 232 1573 236
+      Q1558 239 1559 224 C1559 206 1533 216 1539 197
+      Q1546 183 1529 180 C1507 177 1513 159 1528 151Z"/>
+    <path opacity=".09" d="M67 619 C89 601 117 607 132 586 Q142 573 154 579
+      C169 589 175 562 190 564 Q201 569 210 558 C224 536 239 555 248 542
+      C263 522 285 535 299 518 Q312 504 321 513 C336 526 355 503 363 514
+      Q367 521 357 529 C347 543 374 539 362 554 Q353 565 340 564
+      C318 562 313 586 291 584 C271 581 271 608 252 617 Z"/>
+    <path opacity=".064" d="M380 501 Q388 499 394 491 C400 484 411 488 406 494
+      Q401 498 403 502 C401 511 386 504 381 509 Q370 512 380 501Z"/>
+    <path opacity=".056" d="M689 621 C699 601 722 607 731 592 C744 572 757 586 771 580
+      C799 568 806 586 823 575 Q838 566 846 580 C858 597 875 583 893 595
+      Q907 607 924 607 L933 621 Z"/>
+    <path opacity=".078" d="M1229 487 C1244 469 1260 480 1273 466 Q1286 449 1304 454
+      C1316 460 1324 439 1339 447 Q1352 457 1368 447 C1387 434 1400 452 1418 437
+      C1434 425 1447 429 1441 443 C1434 459 1456 451 1448 467
+      C1439 484 1416 474 1404 490 Q1394 507 1375 505 C1345 501 1334 528 1316 515
+      Q1304 507 1293 516 C1275 532 1263 511 1247 518 C1230 523 1216 504 1229 487Z"/>
   </g>
 
-  <!-- Parallel flight paths emerge along the edges of the photographs. -->
-  <g stroke="#80FF00" stroke-width="2">
-    <path d="M-121 491C149 544 399 394 681 262S1210 49 1545 47" opacity=".46"/>
-    <path d="M-47 111C177 161 341 136 529 48" opacity=".32"/>
-    <path d="M205 631C374 490 551 472 747 495S1035 573 1174 538" opacity=".48"/>
-    <path d="M1084 657C1295 527 1495 372 1645 208" opacity=".34"/>
-  </g>
-
-  <!-- A banked disc near the upper edge, with a short illuminated rim. -->
-  <g transform="translate(369 42) rotate(-17)">
-    <ellipse rx="102" ry="28" fill="#80FF00" fill-opacity=".07" stroke="#9DBD7E" stroke-opacity=".65"/>
-    <ellipse rx="83" ry="18" stroke="#80FF00" stroke-width="1.5" stroke-opacity=".48"/>
-    <path d="M-102 0a102 28 0 0 0 102 28" stroke="#80FF00" stroke-width="3" stroke-opacity=".55"/>
-  </g>
-
-  <!-- Interrupted rings and a small solid sector echo the face of the disc. -->
-  <g transform="translate(182 548)">
-    <circle r="56" stroke="#9DBD7E" stroke-opacity=".65"/>
-    <path d="M-68 0a68 68 0 0 1 102-59M68 0a68 68 0 0 1-18 46" stroke="#80FF00" stroke-width="2" opacity=".52"/>
-    <path d="M0 0l24-34a42 42 0 0 1 18 34z" fill="#80FF00" fill-opacity=".17"/>
-    <circle r="3" fill="#9DBD7E"/>
-  </g>
-  <g transform="translate(901 80)">
-    <circle r="39" stroke="#9DBD7E" stroke-opacity=".67"/>
-    <path d="M-51 0a51 51 0 0 1 88-35" stroke="#80FF00" stroke-width="2" opacity=".55"/>
-    <circle r="9" fill="#80FF00" fill-opacity=".2"/>
-  </g>
-  <g transform="translate(1494 520) rotate(-24)">
-    <ellipse rx="161" ry="34" stroke="#80FF00" stroke-width="1.8" stroke-opacity=".47"/>
-    <path d="M-139-18a161 34 0 0 0-22 18" stroke="#80FF00" stroke-width="4" opacity=".5"/>
-  </g>
-
-  <!-- Direction marks are grouped like the short strokes in a throwing motion. -->
-  <g fill="#80FF00" fill-opacity=".22">
-    <path d="M353 548l40-26h15l-40 26z"/>
-    <path d="M379 548l40-26h15l-40 26z"/>
-    <path d="M1233 40l46-29h17l-46 29z"/>
-  </g>
-  <g stroke="#9DBD7E" stroke-width="1.3" opacity=".8">
-    <path d="M408 548l40-26h15l-40 26zM1209 40l46-29"/>
-    <path d="M631 395l44-27m-31 29 44-27m-31 29 44-27"/>
-  </g>
-  <g transform="translate(1080 385) rotate(-26)">
-    <path d="M-33 0 0-16 33 0 0 16z" fill="#80FF00" fill-opacity=".12" stroke="#80FF00" stroke-opacity=".45"/>
-    <path d="m15 18 28-14" stroke="#9DBD7E"/>
+  <!-- Only the opacity changes from one sage flight line to the next. -->
+  <g fill="none" stroke="#9DBD7E" stroke-width="1.4">
+    <path opacity=".80" d="M-186 506C114 554 368 421 672 278S1271 38 1748 72"/>
+    <path opacity=".44" d="M-178 520C123 569 380 431 683 289S1281 50 1750 85"/>
+    <path opacity=".26" d="M-121 491C149 544 399 394 681 262S1210 49 1645 47"/>
+    <path opacity=".69" d="M960 666C1222 523 1489 347 1682 133"/>
+    <path opacity=".34" d="M1001 669C1250 525 1506 354 1691 144"/>
+    <path opacity=".61" d="M-98 239C45 216 163 144 226 65S264-49 192-52"/>
+    <path opacity=".30" d="M-97 248C51 224 171 149 238 61S270-48 201-57"/>
+    <path opacity=".58" d="M-68 98C153 159 321 144 527 47S736-46 818-51"/>
+    <path opacity=".35" d="M-65 110C179 163 343 140 532 51S754-42 831-47"/>
+    <path opacity=".68" d="M187 630C340 491 540 457 747 480S1018 559 1160 529S1486 391 1672 429"/>
+    <path opacity=".33" d="M205 639C374 497 551 472 747 495S1035 573 1174 538S1497 403 1678 443"/>
   </g>
 </svg>
