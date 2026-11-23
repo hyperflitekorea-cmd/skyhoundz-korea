@@ -3,10 +3,57 @@
     <path d="M-186 506C114 554 368 421 672 278S1271 38 1748 72"/>
     <path d="M-178 520C123 569 380 431 683 289S1281 50 1750 85" opacity=".58"/>
     <path d="M960 666C1222 523 1489 347 1682 133"/>
-  </g>
-  <g stroke="#ADC799" stroke-width="1.2">
-    <path d="M-98 239C45 216 163 144 226 65S264-49 192-52"/>
-    <path d="M-79 237C57 203 164 135 219 62" opacity=".7"/>
+    <path d="M-98 239C45 216 163 144 226 65S264-49 192-52" opacity=".78"/>
+    <path d="M-79 237C57 203 164 135 219 62" opacity=".48"/>
     <ellipse cx="1494" cy="520" rx="193" ry="49" transform="rotate(-24 1494 520)"/>
+    <path d="M-68 98C153 159 321 144 527 47S736-46 818-51" opacity=".62"/>
+    <path d="M187 630C340 491 540 457 747 480S1018 559 1160 529" opacity=".72"/>
+  </g>
+
+  <!-- Parallel flight paths emerge along the edges of the photographs. -->
+  <g stroke="#80FF00" stroke-width="2">
+    <path d="M-121 491C149 544 399 394 681 262S1210 49 1545 47" opacity=".46"/>
+    <path d="M-47 111C177 161 341 136 529 48" opacity=".32"/>
+    <path d="M205 631C374 490 551 472 747 495S1035 573 1174 538" opacity=".48"/>
+    <path d="M1084 657C1295 527 1495 372 1645 208" opacity=".34"/>
+  </g>
+
+  <!-- A banked disc near the upper edge, with a short illuminated rim. -->
+  <g transform="translate(369 42) rotate(-17)">
+    <ellipse rx="102" ry="28" fill="#80FF00" fill-opacity=".07" stroke="#9DBD7E" stroke-opacity=".65"/>
+    <ellipse rx="83" ry="18" stroke="#80FF00" stroke-width="1.5" stroke-opacity=".48"/>
+    <path d="M-102 0a102 28 0 0 0 102 28" stroke="#80FF00" stroke-width="3" stroke-opacity=".55"/>
+  </g>
+
+  <!-- Interrupted rings and a small solid sector echo the face of the disc. -->
+  <g transform="translate(182 548)">
+    <circle r="56" stroke="#9DBD7E" stroke-opacity=".65"/>
+    <path d="M-68 0a68 68 0 0 1 102-59M68 0a68 68 0 0 1-18 46" stroke="#80FF00" stroke-width="2" opacity=".52"/>
+    <path d="M0 0l24-34a42 42 0 0 1 18 34z" fill="#80FF00" fill-opacity=".17"/>
+    <circle r="3" fill="#9DBD7E"/>
+  </g>
+  <g transform="translate(901 80)">
+    <circle r="39" stroke="#9DBD7E" stroke-opacity=".67"/>
+    <path d="M-51 0a51 51 0 0 1 88-35" stroke="#80FF00" stroke-width="2" opacity=".55"/>
+    <circle r="9" fill="#80FF00" fill-opacity=".2"/>
+  </g>
+  <g transform="translate(1494 520) rotate(-24)">
+    <ellipse rx="161" ry="34" stroke="#80FF00" stroke-width="1.8" stroke-opacity=".47"/>
+    <path d="M-139-18a161 34 0 0 0-22 18" stroke="#80FF00" stroke-width="4" opacity=".5"/>
+  </g>
+
+  <!-- Direction marks are grouped like the short strokes in a throwing motion. -->
+  <g fill="#80FF00" fill-opacity=".22">
+    <path d="M353 548l40-26h15l-40 26z"/>
+    <path d="M379 548l40-26h15l-40 26z"/>
+    <path d="M1233 40l46-29h17l-46 29z"/>
+  </g>
+  <g stroke="#9DBD7E" stroke-width="1.3" opacity=".8">
+    <path d="M408 548l40-26h15l-40 26zM1209 40l46-29"/>
+    <path d="M631 395l44-27m-31 29 44-27m-31 29 44-27"/>
+  </g>
+  <g transform="translate(1080 385) rotate(-26)">
+    <path d="M-33 0 0-16 33 0 0 16z" fill="#80FF00" fill-opacity=".12" stroke="#80FF00" stroke-opacity=".45"/>
+    <path d="m15 18 28-14" stroke="#9DBD7E"/>
   </g>
 </svg>

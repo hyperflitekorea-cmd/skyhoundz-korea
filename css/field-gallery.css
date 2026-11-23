@@ -7,7 +7,8 @@
 
 .field-gallery__viewport {
   overflow: hidden;
-  background: #eef1ed url("../assets/home/field-flight-lines.svg") center /
+  background: #eef1ed
+    url("../assets/home/field-flight-lines.svg?v=20261124-orbits") center /
     cover no-repeat;
 }
 
