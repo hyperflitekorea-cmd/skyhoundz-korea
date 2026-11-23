@@ -262,10 +262,6 @@
 .product-card--goods .product-meta h3 {
   flex: 1;
 }
-.stock-request {
-  display: grid;
-  gap: 10px;
-}
 .stock-request-button {
   width: 100%;
   min-height: 48px;
@@ -281,13 +277,6 @@
   width: 20px;
   height: 20px;
   flex-shrink: 0;
-}
-.stock-request-note {
-  font-size: 12px;
-  line-height: 1.7;
-  color: var(--muted);
-  word-break: keep-all;
-  overflow-wrap: anywhere;
 }
 .product-dialog-info .stock-request {
   margin-block: 24px;
@@ -1288,12 +1277,6 @@ button:disabled {
   justify-content: space-between;
   gap: 15px;
   margin-bottom: 10px;
-}
-.cart-note {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.8;
-  margin-top: 15px;
 }
 .cart-actions {
   display: flex;
