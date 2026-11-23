@@ -83,7 +83,18 @@
 
   window.addEventListener('scroll', requestPaint, { passive: true });
   window.addEventListener('resize', requestMeasure);
-  window.addEventListener('hashchange', requestMeasure);
+  gallery.addEventListener('focusin', ({ target }) => {
+    if (!motion.matches || !target.closest('.home-featured') || !target.matches(':focus-visible')) return;
+    if (inset - gallery.getBoundingClientRect().top >= distance) return;
+    // Tabbing into a product should bring its whole card into view.
+    gallery.scrollIntoView({ behavior: 'instant', block: 'end' });
+    target.scrollIntoView({ behavior: 'instant', block: 'center' });
+  });
+  // The router may return to a previously hidden gallery, then jump to a bookmark.
+  document.addEventListener('home:show', () => {
+    measure();
+    requestPaint();
+  });
   motion.addEventListener('change', requestMeasure);
   paint();
 })();

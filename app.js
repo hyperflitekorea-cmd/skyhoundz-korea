@@ -727,6 +727,7 @@
       if (fallbackHash) window.history.replaceState(window.history.state, '', fallbackHash);
       if (route === 'shop') renderProducts(sub);
       document.querySelectorAll('[data-page]').forEach((page) => { page.hidden = page.dataset.page !== route; });
+      if (route === 'home') document.dispatchEvent(new Event('home:show'));
       document.title = routes[route];
       document.body.dataset.currentPage = route;
       document.querySelectorAll('a[data-route]').forEach((link) => {
@@ -741,8 +742,12 @@
       requestAnimationFrame(() => {
         const target = sub ? document.getElementById(`${route}-${sub}`) : null;
         if (!initial) document.querySelector('#main')?.focus({ preventScroll: true });
-        if (target && target.closest('[data-page]')?.dataset.page === route) target.scrollIntoView({ behavior: 'instant', block: 'start' });
-        else window.scrollTo({ top: 0, behavior: 'instant' });
+        if (target && target.closest('[data-page]')?.dataset.page === route) {
+          // Resolve product bookmarks at their final position, after the gallery unpins.
+          const gallery = target.closest('.home-featured')?.closest('.field-gallery--scroll');
+          gallery?.scrollIntoView({ behavior: 'instant', block: 'end' });
+          target.scrollIntoView({ behavior: 'instant', block: 'start' });
+        } else window.scrollTo({ top: 0, behavior: 'instant' });
       });
     }
 
