@@ -49,8 +49,7 @@
   height: 18px;
   color: var(--accent);
   fill: currentColor;
-  stroke: var(--brand-green);
-  stroke-width: 1.25;
+  stroke: none;
 }
 .review-body {
   font-size: 16px;
