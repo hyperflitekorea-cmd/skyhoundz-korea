@@ -1,15 +1,8 @@
 /* Continuous edge light on hover, one sweep on keyboard focus; resting colors stay fixed. */
 :root {
   --button-light-base: var(--accent);
-  --button-light-rgb: 255,79,100;
-  --button-light: #ff6d88;
-  --button-light-soft: #ffd5df;
-}
-:is(.site-header,[data-page="competition"],[data-page="training"]) {
-  --button-light-base: var(--accent-secondary);
-  --button-light-rgb: 125,211,252;
-  --button-light: var(--accent-secondary);
-  --button-light-soft: #dff4ff;
+  --button-light: #adff5c;
+  --button-light-soft: #e5ffc9;
 }
 @property --button-orbit-angle {
   syntax: "<angle>";
@@ -33,7 +26,7 @@
     border-radius: 6px;
     pointer-events: none;
     opacity: 0;
-    background: conic-gradient(from var(--button-orbit-angle),transparent 0deg 225deg,rgba(var(--button-light-rgb),.18) 265deg,var(--button-light) 307deg,var(--button-light-soft) 337deg,#fff 351deg,transparent 360deg);
+    background: conic-gradient(from var(--button-orbit-angle),transparent 0deg 225deg,color-mix(in srgb,var(--button-light) 18%,transparent) 265deg,var(--button-light) 307deg,var(--button-light-soft) 337deg,#fff 351deg,transparent 360deg);
     -webkit-mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);

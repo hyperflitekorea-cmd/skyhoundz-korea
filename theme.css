@@ -1,0 +1,35 @@
+/* Shared design settings for Hyperflite Korea. Page layouts live in the section stylesheets. */
+:root {
+  /* Brand and dark sections */
+  --brand-green: #182a0a;
+  --night: var(--brand-green);
+  --home-deep: #0c1607;
+  --home-glow: #334d1c;
+  --home-gradient-end: #48602a;
+  --inverse-muted: #e4e8e7;
+  --home-light-text: var(--inverse-muted);
+
+  /* Training guide and disc blueprints */
+  --guide-cover-navy: #0e2a66;
+  --blueprint-deep: #081a38;
+
+  /* Buttons, text and surfaces */
+  --accent: #80ff00;
+  --on-accent: #17212c;
+  --accent-secondary: #e3e7e6;
+  --accent-secondary-ink: #17212c;
+  --accent-secondary-soft: #f2f3f3;
+  --accent-dark: var(--accent-secondary-ink);
+  --soft: var(--accent-secondary-soft);
+  --pale: var(--soft);
+  --soft-open: #d9dfde;
+  --line: #cdd5d2;
+  --ink: #1a202c;
+  --muted: #56615f;
+  --paper: #fff;
+
+  /* Typography and motion */
+  --body: Pretendard, 'Noto Sans KR', sans-serif;
+  --display: 'Barlow Condensed', sans-serif;
+  --ease: cubic-bezier(.16,1,.3,1);
+}
