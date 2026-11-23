@@ -1,0 +1,393 @@
+/* Hyperflite brand: comfort, product engineering, and shared sporting roots. */
+[data-page="brand"] h1,
+[data-page="brand"] h2,
+[data-page="brand"] h3 {
+  letter-spacing: -.03em;
+}
+[data-page="brand"] p {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+[data-page="brand"] a:focus-visible {
+  outline: 3px solid var(--accent-dark);
+  outline-offset: 5px;
+}
+.brand-welcome {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  padding-block: 76px 88px;
+}
+.brand-welcome-copy {
+  min-width: 0;
+}
+.brand-intro-logo {
+  width: min(260px, 100%);
+  height: auto;
+  margin-bottom: 30px;
+}
+.brand-welcome h1 {
+  font-size: clamp(36px, 3.7vw, 54px);
+  font-weight: 750;
+  line-height: 1.3;
+}
+.brand-welcome h1 span {
+  color: var(--brand-green);
+}
+.brand-welcome .brand-value {
+  margin-top: 24px;
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 550;
+  line-height: 1.8;
+}
+.brand-welcome .brand-intro {
+  max-width: 36em;
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.9;
+}
+.brand-field-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 800 / 502;
+  object-fit: contain;
+}
+.brand-design {
+  background: var(--blueprint-deep);
+  color: var(--paper);
+}
+.brand-design-inner {
+  padding-block: 76px 80px;
+}
+.brand-design-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 36px;
+}
+.brand-design h2 {
+  font-size: clamp(38px, 4.6vw, 64px);
+  line-height: 1.2;
+  font-weight: 750;
+}
+.brand-design-heading p {
+  color: #cbdcf0;
+  font-size: 16px;
+  line-height: 1.8;
+}
+.brand-blueprint {
+  margin: 36px 0 32px;
+}
+.brand-blueprint img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1671 / 941;
+  object-fit: contain;
+}
+.brand-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.brand-feature {
+  min-width: 0;
+  padding: 26px;
+  border: 1px solid #355172;
+  border-radius: 14px;
+  background: #112c4b;
+}
+.brand-feature-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  margin-bottom: 26px;
+}
+.brand-feature h3 {
+  display: flex;
+  align-items: baseline;
+  gap: .14em;
+  min-height: 37px;
+  font-size: clamp(19px, 1.8vw, 24px);
+  line-height: 1.45;
+  font-weight: 700;
+}
+.brand-feature-count {
+  font-family: var(--display);
+  font-size: 38px;
+  line-height: 1;
+  color: #f4f3ef;
+}
+.brand-feature-divider {
+  color: #98b4d5;
+  margin-inline: .2em;
+  font-weight: 400;
+}
+.brand-feature p {
+  margin-top: 17px;
+  color: #cbdcf0;
+  font-size: 15px;
+  line-height: 1.85;
+}
+.brand-relationship {
+  padding-block: 88px;
+}
+.brand-relationship h2 {
+  font-size: clamp(32px, 3.4vw, 46px);
+  line-height: 1.35;
+  font-weight: 750;
+}
+.brand-posters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  max-width: 880px;
+  margin: 40px auto 56px;
+}
+.brand-posters figure {
+  min-width: 0;
+  margin: 0;
+}
+.brand-posters a {
+  display: block;
+  background: var(--soft);
+  outline: 1px solid var(--line);
+  outline-offset: 0;
+  transition: transform .25s ease;
+}
+.brand-posters img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: contain;
+}
+.brand-posters figcaption {
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.brand-posters figcaption strong {
+  font-weight: 550;
+}
+.brand-roles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+}
+.brand-roles article {
+  min-width: 0;
+  border-top: 1px solid var(--line);
+  padding-top: 30px;
+}
+.brand-roles h3 {
+  color: var(--brand-green);
+  font-family: var(--display);
+  font-size: clamp(42px, 4vw, 56px);
+  font-weight: 700;
+  line-height: 1;
+}
+.brand-roles .brand-role {
+  margin-top: 18px;
+  color: var(--ink);
+  font-size: 22px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+.brand-roles p {
+  color: var(--muted);
+  margin-top: 18px;
+  font-size: 16px;
+  line-height: 1.9;
+}
+.brand-roles .brand-disc-rule {
+  padding: 20px;
+  margin-top: 26px;
+  border-radius: 12px;
+  background: var(--soft);
+  color: var(--brand-green);
+  font-size: 14px;
+  line-height: 1.8;
+}
+.brand-disc-rule strong {
+  font-weight: 650;
+}
+@media (hover: hover) and (pointer: fine) {
+  .brand-posters a:hover {
+    transform: translateY(-4px);
+  }
+}
+@media (max-width: 1100px) {
+  .brand-welcome,
+  .brand-roles {
+    gap: 36px;
+  }
+  .brand-feature {
+    padding: 22px;
+  }
+  .brand-feature-grid {
+    gap: 16px;
+  }
+  .brand-feature h3 {
+    font-size: 19px;
+  }
+}
+@media (max-width: 900px) {
+  .brand-welcome {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding-block: 52px 64px;
+  }
+  .brand-welcome h1 {
+    font-size: clamp(38px, 5.6vw, 52px);
+  }
+  .brand-welcome .brand-intro {
+    max-width: 46em;
+  }
+  .brand-field-photo {
+    max-width: 800px;
+  }
+  .brand-design-inner {
+    padding-block: 56px;
+  }
+  .brand-design-heading {
+    display: block;
+  }
+  .brand-design-heading p {
+    margin-top: 20px;
+  }
+  .brand-feature-grid {
+    grid-template-columns: 1fr;
+  }
+  .brand-feature {
+    display: grid;
+    grid-template-columns: minmax(180px, .65fr) 1fr;
+    column-gap: 28px;
+    padding: 26px;
+  }
+  .brand-feature-image {
+    grid-row: 1 / 3;
+    margin-bottom: 0;
+    align-self: center;
+  }
+  .brand-feature h3 {
+    min-height: 0;
+    font-size: 23px;
+  }
+  .brand-feature p {
+    margin-top: 12px;
+  }
+  .brand-relationship {
+    padding-block: 64px;
+  }
+  .brand-roles {
+    gap: 36px;
+  }
+  .brand-roles .brand-role {
+    font-size: 20px;
+  }
+}
+@media (max-width: 600px) {
+  .brand-welcome {
+    padding-block: 36px 44px;
+    gap: 28px;
+  }
+  .brand-intro-logo {
+    width: min(220px, 100%);
+    margin-bottom: 26px;
+  }
+  .brand-welcome h1 {
+    font-size: clamp(30px, 7.5vw, 42px);
+    line-height: 1.35;
+  }
+  .brand-welcome .brand-value {
+    margin-top: 22px;
+    font-size: 16px;
+  }
+  .brand-welcome .brand-intro {
+    margin-top: 20px;
+    font-size: 15px;
+  }
+  .brand-design-inner {
+    padding-block: 44px;
+  }
+  .brand-design h2 {
+    font-size: clamp(32px, 8vw, 44px);
+  }
+  .brand-design-heading p {
+    font-size: 14px;
+    margin-top: 18px;
+  }
+  .brand-blueprint {
+    margin-block: 26px;
+  }
+  .brand-feature {
+    display: block;
+    padding: 24px;
+  }
+  .brand-feature-image {
+    margin-bottom: 20px;
+  }
+  .brand-feature h3 {
+    min-height: 0;
+    font-size: 22px;
+  }
+  .brand-feature-count {
+    font-size: 38px;
+  }
+  .brand-feature p {
+    margin-top: 14px;
+    font-size: 15px;
+  }
+  .brand-relationship {
+    padding-block: 44px;
+  }
+  .brand-relationship h2 {
+    font-size: 31px;
+  }
+  .brand-posters {
+    gap: 16px;
+    margin-block: 28px 38px;
+  }
+  .brand-posters figcaption {
+    margin-top: 10px;
+    font-size: 12px;
+  }
+  .brand-roles {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+  .brand-roles article {
+    padding-top: 26px;
+  }
+  .brand-roles h3 {
+    font-size: 44px;
+  }
+  .brand-roles .brand-role {
+    margin-top: 15px;
+    font-size: 20px;
+  }
+  .brand-roles p {
+    margin-top: 16px;
+    font-size: 15px;
+  }
+  .brand-roles .brand-disc-rule {
+    padding: 18px;
+    font-size: 13px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-posters a {
+    transition: none;
+  }
+  .brand-posters a:hover {
+    transform: none;
+  }
+}

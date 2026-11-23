@@ -24,7 +24,7 @@
         animation.cancel();
         animation = null;
       }
-      details.style.removeProperty('overflow');
+      details.classList.remove('is-animating');
     };
     const setExpanded = (next) => {
       if (expanded === next) return;
@@ -43,10 +43,15 @@
       // Keep the native content rendered until the closing motion completes.
       details.open = true;
       const endHeight = summary.getBoundingClientRect().height + (next ? body.getBoundingClientRect().height : 0);
-      details.style.overflow = 'hidden';
+      details.classList.add('is-animating');
+      const motion = getComputedStyle(details);
       animation = details.animate(
         [{ height: `${startHeight}px` }, { height: `${endHeight}px` }],
-        { duration: next ? 300 : 220, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'both' },
+        {
+          duration: Number(motion.getPropertyValue('--disclosure-duration-ms')),
+          easing: motion.getPropertyValue('--ease').trim(),
+          fill: 'both',
+        },
       );
       animation.onfinish = finishMotion;
     };

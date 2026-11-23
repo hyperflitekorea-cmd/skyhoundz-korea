@@ -103,7 +103,7 @@
   const comparisonProducts = existingProducts.map((original) => products.find((product) => product.id === original.id));
   window.PRODUCTS = products;
 
-  const arrow = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const arrow = '<svg aria-hidden="true"><use href="#arrow-up"/></svg>';
 
   function initialize() {
     const routes = {
@@ -140,7 +140,6 @@
       const scrollArea = entries[0]?.target;
       const hint = compareContent.querySelector('.compare-scroll-hint');
       if (scrollArea && hint) {
-        scrollArea.style.setProperty('--compare-viewport-width', `${scrollArea.clientWidth}px`);
         hint.hidden = scrollArea.scrollWidth <= scrollArea.clientWidth + 1;
       }
     });
@@ -152,9 +151,7 @@
     const clubs = Array.isArray(window.CLUBS)
       ? window.CLUBS.filter((club) => club && typeof club.id === 'string' && typeof club.name === 'string' && club.name.trim())
       : [];
-    let storageAvailable = true;
     let cart = readCart();
-    let requestStorageAvailable = true;
     let stockRequests = readStockRequests();
 
     function getProduct(id) {
@@ -164,7 +161,7 @@
     function productVisual(product, size = 600) {
       return product.image
         ? `<img src="${product.image}" alt="${product.isGoods ? product.name : `Hyperflite ${product.name} 원반`}" loading="lazy" width="${size}" height="${size}">`
-        : '<span class="product-photo-placeholder">상품 사진<br>준비 중</span>';
+        : `<span class="product-photo-placeholder" aria-hidden="true">${product.material}</span>`;
     }
 
     function readStockRequests() {
@@ -172,27 +169,18 @@
         const saved = JSON.parse(localStorage.getItem(requestStorageKey) || '[]');
         return new Set(Array.isArray(saved) ? saved.filter((id) => stockRequestProductIds.has(id)) : []);
       } catch {
-        requestStorageAvailable = false;
         return new Set();
       }
     }
 
     function requestButtonContent(selected) {
-      const path = selected ? 'm5 12 4 4L19 6' : 'M12 5v14M5 12h14';
-      return `<span>${selected ? '선택 취소' : '입고해주세요'}</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="${path}" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-    }
-
-    function requestNote(selected) {
-      if (!requestStorageAvailable) return '현재 화면에만 선택이 유지됩니다. 실제 요청은 전송되지 않습니다.';
-      const note = selected ? '이 브라우저에 저장했어요. 실제 요청은 전송되지 않습니다.' : '선택은 이 브라우저에만 저장됩니다.';
-      return note;
+      return `<span>${selected ? '선택 취소' : '입고해주세요'}</span><svg aria-hidden="true"><use href="#${selected ? 'check' : 'plus'}"/></svg>`;
     }
 
     function renderStockRequest(product) {
       const selected = stockRequests.has(product.id);
       return `<div class="stock-request">
         <button class="button button-secondary stock-request-button" type="button" data-stock-request="${product.id}" data-selected="${selected}" aria-label="${product.name} ${selected ? '입고 요청 선택 취소' : '입고해주세요'}">${requestButtonContent(selected)}</button>
-        <p class="stock-request-note" data-stock-feedback="${product.id}" role="status">${requestNote(selected)}</p>
       </div>`;
     }
 
@@ -205,9 +193,6 @@
         button.setAttribute('aria-label', `${product.name} ${selected ? '입고 요청 선택 취소' : '입고해주세요'}`);
         button.innerHTML = requestButtonContent(selected);
       });
-      document.querySelectorAll('[data-stock-feedback]').forEach((note) => {
-        note.textContent = requestNote(stockRequests.has(note.dataset.stockFeedback));
-      });
     }
 
     function toggleStockRequest(id) {
@@ -216,9 +201,8 @@
       else stockRequests.add(id);
       try {
         localStorage.setItem(requestStorageKey, JSON.stringify([...stockRequests]));
-        requestStorageAvailable = true;
       } catch {
-        requestStorageAvailable = false;
+        // The current selection remains available when storage is blocked.
       }
       // Keep the existing button node so keyboard focus survives the toggle.
       updateStockRequestControls();
@@ -246,11 +230,10 @@
         const items = sanitizeCart(JSON.parse(saved || '[]'));
         const current = JSON.stringify({ version: 1, items });
         if (saved && saved !== current) {
-          try { localStorage.setItem(cartStorageKey, current); } catch { storageAvailable = false; }
+          try { localStorage.setItem(cartStorageKey, current); } catch { /* Keep the normalized cart in memory. */ }
         }
         return items;
       } catch {
-        storageAvailable = false;
         return [];
       }
     }
@@ -258,9 +241,8 @@
     function saveCart() {
       try {
         localStorage.setItem(cartStorageKey, JSON.stringify({ version: 1, items: cart }));
-        storageAvailable = true;
       } catch {
-        storageAvailable = false;
+        // Keep the current cart usable when storage is blocked.
       }
       updateCartCount();
     }
@@ -344,13 +326,12 @@
                 <div class="product-meta">
                   <p class="product-series">${product.material}</p>
                   <h3><button type="button" data-product="${product.id}">${product.name}</button></h3>
-                  <p class="product-spec">${product.isGoods ? '상세 정보 준비 중' : `${product.size}<span aria-hidden="true"> / </span>${product.weight}`}</p>
-                  <p class="product-price">${product.requestOnly ? '입고 검토 후보' : '판매가 공개 예정'}</p>
-                  ${product.requestOnly ? renderStockRequest(product) : `<button class="button button-secondary product-buy" type="button" data-product="${product.id}">${product.isGoods ? '상품 정보' : '구매 옵션'} ${arrow}</button>`}
+                  ${product.isGoods ? '' : `<p class="product-spec">${product.size}<span aria-hidden="true"> / </span>${product.weight}</p>`}
+                  ${product.requestOnly ? renderStockRequest(product) : `<button class="button button-secondary product-buy" type="button" data-product="${product.id}">상품 상세 ${arrow}</button>`}
                 </div>
               </article>
             `).join('')
-          : `<div class="shop-empty"><h3>상품 정보를 준비하고 있어요.</h3><p>${series?.id === 'goods' ? '굿즈 상품은 준비되는 대로 소개할게요.' : '국내 판매 상품과 입고 일정이 정해지면 이곳에 안내할게요.'}</p><a class="text-link" href="#shop">전체 상품 보기 ${arrow}</a></div>`;
+          : `<div class="shop-empty"><h3>등록된 상품이 없습니다.</h3><a class="text-link" href="#shop">전체 상품 보기 ${arrow}</a></div>`;
       }
 
       if (productCount) productCount.textContent = `${filteredProducts.length}개의 상품`;
@@ -368,7 +349,7 @@
         <div class="product-dialog-info">
           <h2 id="product-title">${product.name}</h2>
           <p class="product-material">${product.isGoods ? 'SKYHOUNDZ KOREA' : 'HYPERFLITE'} / ${product.material}</p>
-          <p class="product-dialog-description">${product.description}</p>
+          ${product.description ? `<p class="product-dialog-description">${product.description}</p>` : ''}
           ${product.isGoods ? '' : `<dl class="product-dialog-specs">
             <div><dt>지름</dt><dd>${product.size}</dd></div>
             <div><dt>무게</dt><dd>${product.weight}</dd></div>
@@ -386,7 +367,6 @@
             <div class="product-purchase-actions"><button class="button button-primary" type="submit">장바구니 담기 ${arrow}</button></div>
             <p class="product-feedback" id="product-feedback" role="status" aria-live="polite"></p>
             <button class="text-link" type="button" data-open-cart hidden id="product-view-cart">장바구니 보기 ${arrow}</button>
-            <p class="product-cart-note">담은 제품은 이 브라우저에 저장됩니다. 현재 결제는 지원하지 않습니다.</p>
           </form>`}
           `}
         </div>
@@ -431,7 +411,7 @@
             ${cart.map((item) => {
               const product = getProduct(item.id);
               return `<article class="cart-item">
-                <button class="cart-item-image" type="button" data-product="${product.id}" aria-label="${product.name} 구매 옵션"><img src="${product.image}" alt="" width="130" height="130"></button>
+                <button class="cart-item-image" type="button" data-product="${product.id}" aria-label="${product.name} 상품 상세"><img src="${product.image}" alt="" width="130" height="130"></button>
                 <div class="cart-item-info"><h3>${product.name}</h3><p>${product.size} / ${product.weight}</p><p class="cart-color-note">판매 색상 추후 안내</p></div>
                 <div class="cart-item-controls">
                   <label class="sr-only" for="cart-quantity-${product.id}">${product.name} 수량</label>
@@ -445,7 +425,7 @@
               </article>`;
             }).join('')}
           </div>
-          <div class="cart-summary"><p><strong>총 ${count}개</strong></p><p class="cart-note">현재 결제는 지원하지 않습니다.</p><p class="cart-note">${storageAvailable ? '담은 제품과 수량은 이 브라우저에 저장됩니다.' : '브라우저 저장소를 사용할 수 없어 현재 화면에서만 장바구니가 유지됩니다.'}</p><div class="cart-actions"><button class="button button-primary" type="button" disabled>구매 불가</button><button class="text-link" type="button" data-clear-cart>장바구니 비우기</button></div></div>
+          <div class="cart-summary"><p><strong>총 ${count}개</strong></p><div class="cart-actions"><button class="button button-primary" type="button" disabled>구매 불가</button><button class="text-link" type="button" data-clear-cart>장바구니 비우기</button></div></div>
           <p class="cart-status" id="cart-status" role="status" aria-live="polite"></p>
         `;
       }
@@ -496,7 +476,7 @@
       compareContent.innerHTML = `
         <p class="compare-scroll-hint">좌우로 넘겨 비교하세요. 항목명은 왼쪽에 고정돼요.</p>
         <div class="compare-scroll" tabindex="0" role="region" aria-label="원반 비교 표, 작은 화면에서는 가로로 스크롤할 수 있습니다">
-          <table class="compare-table" style="--compare-columns:${selected.length}"><caption class="sr-only">선택한 Hyperflite 원반의 시리즈, 크기, 무게, 소재 비교${differencesOnly ? ', 차이가 있는 항목만 표시' : ''}</caption>
+          <table class="compare-table"><caption class="sr-only">선택한 Hyperflite 원반의 시리즈, 크기, 무게, 소재 비교${differencesOnly ? ', 차이가 있는 항목만 표시' : ''}</caption>
             <thead><tr><th scope="col">비교 항목</th>${selected.map((product) => `<th scope="col"><div class="compare-product"><img src="${product.image}" alt="" width="120" height="120"><strong>${product.name}</strong></div></th>`).join('')}</tr></thead>
             <tbody>${rows.filter((row) => !differencesOnly || row.different).map((row) => `<tr class="${row.different ? 'compare-row-different' : ''}"><th scope="row">${row.label}${row.different ? '<span class="compare-row-note">차이 있음</span>' : ''}</th>${row.values.map((value) => `<td>${value}</td>`).join('')}</tr>`).join('')}
               <tr class="compare-action-row"><th scope="row">자세히</th>${selected.map((product) => `<td><button class="button button-secondary" type="button" data-product="${product.id}" aria-label="${product.name} 상세 보기">상세 보기</button></td>`).join('')}</tr>
@@ -536,11 +516,12 @@
         const empty = document.createElement('div');
         empty.className = 'club-empty';
         const title = document.createElement('h3');
-        title.textContent = clubs.length ? '검색 조건에 맞는 클럽이 없어요' : '클럽 정보를 준비하고 있어요';
+        title.textContent = clubs.length ? '검색 조건에 맞는 클럽이 없어요' : '등록된 클럽이 없습니다.';
         const description = document.createElement('p');
-        description.textContent = clubs.length ? '다른 지역이나 검색어로 다시 찾아보세요.' : '확인된 국내 디스크도그 클럽 정보를 이곳에 소개할 예정입니다.';
-        empty.append(title, description);
+        empty.append(title);
         if (clubs.length) {
+          description.textContent = '다른 지역이나 검색어로 다시 찾아보세요.';
+          empty.append(description);
           const reset = document.createElement('button');
           reset.type = 'button';
           reset.className = 'text-link';
@@ -561,9 +542,7 @@
           placeholder.className = 'club-logo-placeholder';
           const team = document.createElement('strong');
           team.textContent = club.name;
-          const hint = document.createElement('span');
-          hint.textContent = '클럽 로고';
-          placeholder.append(team, hint);
+          placeholder.append(team);
           logoBox.replaceChildren(placeholder);
         };
         const logoUrl = safeUrl(club.logo, true);
@@ -594,7 +573,7 @@
         if (club.isSample === true) {
           const badge = document.createElement('span');
           badge.className = 'club-sample-badge';
-          badge.textContent = '샘플';
+          badge.textContent = '예시';
           name.append(badge);
         }
         body.append(name);
@@ -655,7 +634,7 @@
       searchResults.innerHTML = matches.map((product) => `
         <button class="search-result" type="button" data-product="${product.id}">
           ${productVisual(product, 80)}
-          <span class="search-result-copy"><strong>${product.name}</strong><span>${product.isGoods ? `${product.material} · 상세 정보 준비 중` : `${product.material} · ${product.size} / ${product.weight}`}</span></span>
+          <span class="search-result-copy"><strong>${product.name}</strong><span>${product.isGoods ? product.material : `${product.material} · ${product.size} / ${product.weight}`}</span></span>
           <span class="search-result-arrow">${arrow}</span>
         </button>
       `).join('');

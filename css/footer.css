@@ -1,0 +1,85 @@
+/* Shared footer across the home, shop and information pages. */
+.site-footer {
+  --line: #404040;
+  padding-top: 48px;
+  background: var(--surface-black);
+  color: var(--paper);
+}
+
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px 40px;
+  padding-bottom: 40px;
+}
+
+.footer-brand img {
+  filter: brightness(0) invert(1);
+}
+
+.footer-brand .brand-region {
+  border-color: currentColor;
+}
+
+.footer-top nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 25px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 25px;
+  padding-block: 22px;
+  border-top: 1px solid var(--line);
+  color: #bdbdbd;
+  font-size: 10px;
+}
+
+.footer-bottom > span {
+  letter-spacing: .08em;
+}
+
+.footer-bottom a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.footer-bottom svg {
+  width: 13px;
+  height: 13px;
+}
+
+@media (max-width: 600px) {
+  .site-footer {
+    padding-top: 35px;
+  }
+
+  .footer-top,
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-top {
+    gap: 22px;
+    padding-bottom: 30px;
+  }
+
+  .footer-top nav {
+    column-gap: 22px;
+    font-size: 11px;
+  }
+
+  .footer-bottom {
+    padding-block: 20px;
+    font-size: 9px;
+  }
+}

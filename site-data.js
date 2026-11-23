@@ -2,12 +2,12 @@
 // Schema: { id, name, region, description, url, logo?, image?, isSample? }
 // Set logo to a local image path (e.g. assets/clubs/team-a.png) or an official HTTPS URL. Empty logos show a placeholder. Samples have no real team logos or channels.
 window.CLUBS = [
-  { id: 'sample-a', name: '팀 A', region: '서울', description: '샘플 클럽입니다. 실제 활동 정보는 등록되지 않았습니다.', url: '', logo: '', isSample: true },
-  { id: 'sample-b', name: '팀 B', region: '경기', description: '샘플 클럽입니다. 실제 활동 정보는 등록되지 않았습니다.', url: '', logo: '', isSample: true },
-  { id: 'sample-c', name: '팀 C', region: '인천', description: '샘플 클럽입니다. 실제 활동 정보는 등록되지 않았습니다.', url: '', logo: '', isSample: true },
-  { id: 'sample-d', name: '팀 D', region: '부산', description: '샘플 클럽입니다. 실제 활동 정보는 등록되지 않았습니다.', url: '', logo: '', isSample: true },
-  { id: 'sample-e', name: '팀 E', region: '대구', description: '샘플 클럽입니다. 실제 활동 정보는 등록되지 않았습니다.', url: '', logo: '', isSample: true },
-  { id: 'sample-f', name: '팀 F', region: '대전', description: '샘플 클럽입니다. 실제 활동 정보는 등록되지 않았습니다.', url: '', logo: '', isSample: true }
+  { id: 'sample-a', name: '팀 A', region: '서울', url: '', logo: '', isSample: true },
+  { id: 'sample-b', name: '팀 B', region: '경기', url: '', logo: '', isSample: true },
+  { id: 'sample-c', name: '팀 C', region: '인천', url: '', logo: '', isSample: true },
+  { id: 'sample-d', name: '팀 D', region: '부산', url: '', logo: '', isSample: true },
+  { id: 'sample-e', name: '팀 E', region: '대구', url: '', logo: '', isSample: true },
+  { id: 'sample-f', name: '팀 F', region: '대전', url: '', logo: '', isSample: true }
 ];
 
 // User-approved hierarchy: SHOP > Hyperflite series > formulation, plus Goods.
@@ -40,5 +40,4 @@ window.GOODS_PRODUCTS = [
   family: 'goods',
   isGoods: true,
   image: '',
-  description: '상품 사진과 상세 사양, 판매가를 준비하고 있습니다. 판매 일정과 옵션은 추후 안내합니다.',
 }));

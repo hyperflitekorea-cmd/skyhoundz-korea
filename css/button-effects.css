@@ -15,7 +15,8 @@
   isolation: isolate;
 }
 
-@supports (background:conic-gradient(from 0deg,transparent,#fff)) and ((mask-composite:exclude) or (-webkit-mask-composite:xor)) {
+@supports (background:conic-gradient(from 0deg,transparent,#fff)) and
+  ((mask-composite:exclude) or (-webkit-mask-composite:xor)) {
   :is(.button:is(.button-primary,.button-dark,.button-white),.desktop-nav .nav-group-shop)::before,
   :is(.button:is(.button-primary,.button-dark,.button-white),.desktop-nav .nav-group-shop)::after {
     content: "";
@@ -26,8 +27,12 @@
     border-radius: 6px;
     pointer-events: none;
     opacity: 0;
-    background: conic-gradient(from var(--button-orbit-angle),transparent 0deg 225deg,color-mix(in srgb,var(--button-light) 18%,transparent) 265deg,var(--button-light) 307deg,var(--button-light-soft) 337deg,#fff 351deg,transparent 360deg);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+    background: conic-gradient(from var(--button-orbit-angle),transparent 0deg
+      225deg,color-mix(in srgb,var(--button-light) 18%,transparent)
+      265deg,var(--button-light) 307deg,var(--button-light-soft) 337deg,#fff
+      351deg,transparent 360deg);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0
+      0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
     mask-composite: exclude;
@@ -60,15 +65,29 @@
   }
 
   @keyframes button-edge-loop {
-    from { --button-orbit-angle: 0deg; }
-    to { --button-orbit-angle: 360deg; }
+    from {
+      --button-orbit-angle: 0deg;
+    }
+    to {
+      --button-orbit-angle: 360deg;
+    }
   }
 
   @keyframes button-edge-orbit {
-    0% { --button-orbit-angle: 0deg; opacity: 0; }
-    9% { opacity: 1; }
-    84% { opacity: 1; }
-    100% { --button-orbit-angle: 360deg; opacity: 0; }
+    0% {
+      --button-orbit-angle: 0deg;
+      opacity: 0;
+    }
+    9% {
+      opacity: 1;
+    }
+    84% {
+      opacity: 1;
+    }
+    100% {
+      --button-orbit-angle: 360deg;
+      opacity: 0;
+    }
   }
 
   @media (prefers-reduced-motion:reduce) {
