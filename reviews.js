@@ -7,20 +7,17 @@
   if (!viewport || !track) return;
 
   const cards = [...track.children];
-  if (!cards.length) return;
+  if (cards.length < 2) return;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let interacting = false;
-  let touching = false;
-  let resumeTimer = 0;
+  const readingTime = 6000;
+  let timer = 0;
+  let step = 0;
+  let visible = false;
+  let held = false;
   let hovered = false;
   let focused = false;
-  let visible = false;
-  let cycleWidth = 0;
-  let offset = 0;
-  let frame = 0;
-  let lastTime = 0;
 
-  // Only the original seven cards belong to the accessibility tree.
+  // A second sequence lets the final slide settle into the first one seamlessly.
   for (const card of cards) {
     const copy = card.cloneNode(true);
     copy.setAttribute('aria-hidden', 'true');
@@ -29,112 +26,89 @@
   }
   section.classList.add('reviews-enhanced');
 
-  function canPlay() {
-    return !reducedMotion.matches && !interacting && !hovered && !focused && visible && !document.hidden
-      && !section.closest('[data-page]').hidden && cycleWidth > 0;
+  function move(direction) {
+    if (!step) return;
+    const current = Math.round(viewport.scrollLeft / step);
+    let index = current % cards.length;
+    if (direction < 0 && index === 0) index = cards.length;
+    if (current !== index) {
+      viewport.scrollTo({ left: index * step, behavior: 'instant' });
+    }
+    viewport.scrollTo({
+      left: (index + direction) * step,
+      behavior: reducedMotion.matches ? 'instant' : 'smooth',
+    });
   }
 
-  function tick(time) {
-    frame = 0;
-    if (!canPlay()) return;
-    // 48 CSS pixels per second: roughly 8 seconds for one desktop card.
-    offset = (offset + Math.min(time - lastTime, 50) * 0.048) % cycleWidth;
-    viewport.scrollLeft = offset;
-    lastTime = time;
-    frame = requestAnimationFrame(tick);
-  }
-
-  function update() {
-    cancelAnimationFrame(frame);
-    frame = 0;
-    section.dataset.playing = String(canPlay());
-    if (canPlay()) {
-      offset = viewport.scrollLeft % cycleWidth;
-      viewport.scrollLeft = offset;
-      lastTime = performance.now();
-      frame = requestAnimationFrame(tick);
+  function schedule() {
+    clearTimeout(timer);
+    const playing = visible && step > 0 && !document.hidden && !section.closest('[data-page]').hidden
+      && !reducedMotion.matches && !held && !hovered && !focused;
+    section.dataset.playing = String(playing);
+    if (playing) {
+      timer = window.setTimeout(() => {
+        move(1);
+        schedule();
+      }, readingTime);
     }
   }
 
   function measure() {
-    const progress = cycleWidth ? viewport.scrollLeft / cycleWidth : 0;
-    cycleWidth = track.children[cards.length].offsetLeft - cards[0].offsetLeft;
-    offset = (progress % 1) * cycleWidth;
-    viewport.scrollLeft = offset;
-    update();
-  }
-
-  function resumeAfterInteraction() {
-    clearTimeout(resumeTimer);
-    if (touching) return;
-    resumeTimer = window.setTimeout(() => {
-      interacting = false;
-      update();
-    }, 2500);
-  }
-
-  function pauseForInteraction() {
-    interacting = true;
-    update();
-    resumeAfterInteraction();
-  }
-
-  function move(direction) {
-    pauseForInteraction();
-    if (cards.length < 2 || !cycleWidth) return;
-    const step = cards[1].offsetLeft - cards[0].offsetLeft;
-    let current = viewport.scrollLeft % cycleWidth;
-    if (direction < 0 && current < step) current += cycleWidth;
-    viewport.scrollLeft = current;
-    const destination = Math.round(current / step) + direction;
-    viewport.scrollTo({ left: destination * step, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+    if (viewport.clientWidth) {
+      const previous = step ? Math.round(viewport.scrollLeft / step) % cards.length : 0;
+      const first = cards[0].getBoundingClientRect().left;
+      const repeat = track.children[cards.length].getBoundingClientRect().left;
+      const newStep = (repeat - first) / cards.length;
+      if (newStep !== step) {
+        step = newStep;
+        viewport.scrollTo({ left: previous * step, behavior: 'instant' });
+      }
+    }
+    schedule();
   }
 
   viewport.addEventListener('pointerenter', (event) => {
-    if (event.pointerType === 'mouse') { hovered = true; update(); }
+    hovered = event.pointerType === 'mouse';
+    schedule();
   });
-  viewport.addEventListener('pointerleave', () => { hovered = false; update(); });
-  viewport.addEventListener('pointerdown', (event) => {
+  viewport.addEventListener('pointerleave', () => {
+    hovered = false;
+    schedule();
+  });
+  viewport.addEventListener('pointerdown', () => {
+    held = true;
     focused = false;
-    if (event.pointerType !== 'mouse') {
-      touching = true;
-      pauseForInteraction();
-    }
+    schedule();
   });
-  function endTouch() {
-    if (!touching) return;
-    touching = false;
-    resumeAfterInteraction();
+  function release() {
+    if (!held) return;
+    held = false;
+    schedule();
   }
-  window.addEventListener('pointerup', endTouch);
-  window.addEventListener('pointercancel', endTouch);
-  viewport.addEventListener('wheel', pauseForInteraction, { passive: true });
-  viewport.addEventListener('scroll', () => {
-    if (!canPlay()) offset = viewport.scrollLeft;
-    // Let touch momentum settle before restarting the automatic movement.
-    if (interacting) resumeAfterInteraction();
-  }, { passive: true });
-  section.addEventListener('focusin', () => {
+  window.addEventListener('pointerup', release);
+  window.addEventListener('pointercancel', release);
+  viewport.addEventListener('scroll', schedule, { passive: true });
+  viewport.addEventListener('focus', () => {
     focused = viewport.matches(':focus-visible');
-    update();
+    schedule();
   });
-  section.addEventListener('focusout', (event) => {
-    if (!section.contains(event.relatedTarget)) { focused = false; update(); }
+  viewport.addEventListener('blur', () => {
+    focused = false;
+    schedule();
   });
   viewport.addEventListener('keydown', (event) => {
     focused = true;
-    update();
-    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-      event.preventDefault();
-      move(event.key === 'ArrowLeft' ? -1 : 1);
-    }
+    schedule();
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    move(event.key === 'ArrowLeft' ? -1 : 1);
   });
-  document.addEventListener('visibilitychange', update);
-  window.addEventListener('hashchange', update);
-  reducedMotion.addEventListener('change', update);
+  document.addEventListener('visibilitychange', schedule);
+  window.addEventListener('hashchange', schedule);
+  reducedMotion.addEventListener('change', schedule);
   new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting;
-    update();
+    schedule();
   }, { threshold: 0.05 }).observe(viewport);
   new ResizeObserver(measure).observe(viewport);
   measure();

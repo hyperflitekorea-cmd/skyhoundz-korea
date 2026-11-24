@@ -1,75 +1,51 @@
 (() => {
   const gallery = document.querySelector('.field-gallery');
-  if (!gallery) return;
+  if (!gallery || !CSS.supports('clip-path', 'inset(0)')) return;
 
   const viewport = gallery.querySelector('.field-gallery__viewport');
   const track = gallery.querySelector('.field-gallery__track');
-  const shots = Array.from(track.querySelectorAll('.field-gallery__shot'));
   const header = document.querySelector('.site-header');
   const motion = window.matchMedia('(prefers-reduced-motion: no-preference)');
-
-  let visible = true;
-  let needsMeasure = true;
-  let frame = 0;
   let inset = 0;
-  let viewportWidth = 0;
   let distance = 0;
-  let previousOffset = -1;
-  let photos = [];
+  let lastProgress = -1;
+  let visible = true;
+  let frame = 0;
 
-  function measure() {
-    needsMeasure = false;
-    previousOffset = -1;
-    gallery.classList.toggle('field-gallery--scroll', motion.matches);
-    if (!motion.matches) {
-      track.style.removeProperty('transform');
-      for (const photo of photos) photo.image.style.removeProperty('transform');
-      distance = 0;
-      return;
-    }
-
-    // A hidden SPA page has no geometry. ResizeObserver remeasures it on return.
-    viewportWidth = viewport.clientWidth;
-    if (!viewportWidth) return;
-    inset = header?.offsetHeight || 0;
-    gallery.style.setProperty('--field-header', `${inset}px`);
-    distance = Math.max(0, track.scrollWidth - viewportWidth);
-    gallery.style.setProperty('--field-travel', `${distance}px`);
-    photos = shots.map((shot) => ({
-      image: shot.querySelector('img'),
-      center: shot.offsetLeft + shot.offsetWidth / 2,
-      width: shot.offsetWidth,
-    }));
+  // Hold each spread at the ends. The smaller frame follows the main photograph.
+  function hiddenPortion(progress, start, end) {
+    const t = Math.min(1, Math.max(0, (progress - start) / (end - start)));
+    return ((1 - t * t * (3 - 2 * t)) * 100) + '%';
   }
 
   function paint() {
     frame = 0;
-    if (needsMeasure) measure();
-    if (!visible || !motion.matches || !viewportWidth) return;
-    const offset = Math.min(distance, Math.max(0, inset - gallery.getBoundingClientRect().top));
-    if (offset === previousOffset) return;
-    previousOffset = offset;
-
-    track.style.transform = `translate3d(${-offset}px, 0, 0)`;
-    for (const photo of photos) {
-      // Pan gently against the track as each frame crosses the viewport.
-      const relative = (offset + viewportWidth / 2 - photo.center) / ((viewportWidth + photo.width) / 2);
-      const shift = Math.max(-1, Math.min(1, relative)) * photo.width * 0.046;
-      photo.image.style.transform = `translate3d(${shift}px, 0, 0)`;
-    }
+    if (!motion.matches || !distance || !visible) return;
+    const top = gallery.getBoundingClientRect().top;
+    const progress = Math.min(1, Math.max(0, (inset - top) / distance));
+    if (progress === lastProgress) return;
+    lastProgress = progress;
+    track.style.setProperty('--main-inset', hiddenPortion(progress, 0.10, 0.72));
+    track.style.setProperty('--detail-inset', hiddenPortion(progress, 0.28, 0.90));
   }
 
   function requestPaint() {
-    if (!frame && (visible || needsMeasure)) frame = requestAnimationFrame(paint);
+    if (!frame && visible && motion.matches) frame = requestAnimationFrame(paint);
   }
 
-  function requestMeasure() {
-    needsMeasure = true;
+  function measure() {
+    gallery.classList.toggle('field-gallery--scroll', motion.matches);
+    if (!motion.matches || !viewport.clientWidth) return;
+    inset = header?.offsetHeight || 0;
+    distance = Math.round(viewport.clientHeight * 1.25);
+    gallery.style.setProperty('--field-header', inset + 'px');
+    gallery.style.setProperty('--field-travel', distance + 'px');
+    lastProgress = -1;
     requestPaint();
   }
 
   if ('ResizeObserver' in window) {
-    const observer = new ResizeObserver(requestMeasure);
+    const observer = new ResizeObserver(measure);
     observer.observe(viewport);
     if (header) observer.observe(header);
   }
@@ -81,20 +57,15 @@
     observer.observe(gallery);
   }
 
-  window.addEventListener('scroll', requestPaint, { passive: true });
-  window.addEventListener('resize', requestMeasure);
   gallery.addEventListener('focusin', ({ target }) => {
     if (!motion.matches || !target.closest('.home-featured') || !target.matches(':focus-visible')) return;
     if (inset - gallery.getBoundingClientRect().top >= distance) return;
-    // Tabbing into a product should bring its whole card into view.
     gallery.scrollIntoView({ behavior: 'instant', block: 'end' });
     target.scrollIntoView({ behavior: 'instant', block: 'center' });
   });
-  // The router may return to a previously hidden gallery, then jump to a bookmark.
-  document.addEventListener('home:show', () => {
-    measure();
-    requestPaint();
-  });
-  motion.addEventListener('change', requestMeasure);
-  paint();
+  window.addEventListener('scroll', requestPaint, { passive: true });
+  window.addEventListener('resize', measure);
+  document.addEventListener('home:show', measure);
+  motion.addEventListener('change', measure);
+  measure();
 })();
