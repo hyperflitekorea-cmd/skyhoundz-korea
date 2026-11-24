@@ -4,112 +4,138 @@
   const section = document.querySelector('.home-reviews');
   const viewport = section?.querySelector('.review-window');
   const track = section?.querySelector('.review-track');
-  if (!viewport || !track) return;
+  const dialog = document.getElementById('review-dialog');
+  if (!viewport || !track || !dialog?.showModal || track.children.length < 2) return;
 
   const cards = [...track.children];
-  if (cards.length < 2) return;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const readingTime = 6000;
-  let timer = 0;
+  const speed = 24; // CSS pixels per second
   let step = 0;
+  let frame = 0;
+  let previousTime = 0;
+  let position = 0;
   let visible = false;
-  let held = false;
   let hovered = false;
-  let focused = false;
+  let touching = false;
+  let resumeTimer = 0;
 
-  // A second sequence lets the final slide settle into the first one seamlessly.
   for (const card of cards) {
-    const copy = card.cloneNode(true);
-    copy.setAttribute('aria-hidden', 'true');
-    copy.inert = true;
-    track.append(copy);
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'review-read';
+    button.setAttribute('data-open-review', '');
+    button.textContent = '전문 보기';
+    button.setAttribute('aria-label', card.getAttribute('aria-label') + ' 전문 보기');
+    button.setAttribute('aria-haspopup', 'dialog');
+    button.setAttribute('aria-controls', dialog.id);
+    button.hidden = true;
+    card.querySelector('.review-rating').append(button);
   }
   section.classList.add('reviews-enhanced');
 
-  function move(direction) {
-    if (!step) return;
-    const current = Math.round(viewport.scrollLeft / step);
-    let index = current % cards.length;
-    if (direction < 0 && index === 0) index = cards.length;
-    if (current !== index) {
-      viewport.scrollTo({ left: index * step, behavior: 'instant' });
-    }
-    viewport.scrollTo({
-      left: (index + direction) * step,
-      behavior: reducedMotion.matches ? 'instant' : 'smooth',
-    });
-  }
-
-  function schedule() {
-    clearTimeout(timer);
-    const playing = visible && step > 0 && !document.hidden && !section.closest('[data-page]').hidden
-      && !reducedMotion.matches && !held && !hovered && !focused;
-    section.dataset.playing = String(playing);
-    if (playing) {
-      timer = window.setTimeout(() => {
-        move(1);
-        schedule();
-      }, readingTime);
-    }
-  }
-
   function measure() {
-    if (viewport.clientWidth) {
-      const previous = step ? Math.round(viewport.scrollLeft / step) % cards.length : 0;
-      const first = cards[0].getBoundingClientRect().left;
-      const repeat = track.children[cards.length].getBoundingClientRect().left;
-      const newStep = (repeat - first) / cards.length;
-      if (newStep !== step) {
-        step = newStep;
-        viewport.scrollTo({ left: previous * step, behavior: 'instant' });
-      }
+    if (!viewport.clientWidth) return;
+    step = track.children[1].offsetLeft - track.children[0].offsetLeft;
+    for (const card of cards) {
+      const body = card.querySelector('.review-body');
+      card.querySelector('.review-read').hidden = body.scrollHeight <= body.clientHeight + 1;
     }
-    schedule();
+    updateMotion();
+  }
+
+  function advance(time) {
+    const elapsed = previousTime ? Math.min(time - previousTime, 80) : 0;
+    previousTime = time;
+    position += speed * elapsed / 1000;
+    if (position >= step) {
+      // Move only a card which has already passed out of sight.
+      track.append(track.firstElementChild);
+      position -= step;
+    }
+    viewport.scrollLeft = position;
+    frame = requestAnimationFrame(advance);
+  }
+
+  function updateMotion() {
+    const playing = visible && step > 0 && !document.hidden && !reducedMotion.matches
+      && !hovered && !touching && !resumeTimer && !dialog.open
+      && !viewport.querySelector(':focus-visible') && !viewport.matches(':focus-visible');
+    section.dataset.playing = String(playing);
+    if (playing && !frame) {
+      previousTime = 0;
+      position = viewport.scrollLeft;
+      frame = requestAnimationFrame(advance);
+    } else if (!playing && frame) {
+      cancelAnimationFrame(frame);
+      frame = 0;
+    }
+  }
+
+  function resumeLater() {
+    touching = false;
+    clearTimeout(resumeTimer);
+    resumeTimer = window.setTimeout(() => {
+      resumeTimer = 0;
+      updateMotion();
+    }, 4000);
+    updateMotion();
   }
 
   viewport.addEventListener('pointerenter', (event) => {
     hovered = event.pointerType === 'mouse';
-    schedule();
+    updateMotion();
   });
   viewport.addEventListener('pointerleave', () => {
     hovered = false;
-    schedule();
+    updateMotion();
   });
   viewport.addEventListener('pointerdown', () => {
-    held = true;
-    focused = false;
-    schedule();
+    touching = true;
+    updateMotion();
   });
   function release() {
-    if (!held) return;
-    held = false;
-    schedule();
+    if (touching) resumeLater();
   }
   window.addEventListener('pointerup', release);
   window.addEventListener('pointercancel', release);
-  viewport.addEventListener('scroll', schedule, { passive: true });
-  viewport.addEventListener('focus', () => {
-    focused = viewport.matches(':focus-visible');
-    schedule();
-  });
-  viewport.addEventListener('blur', () => {
-    focused = false;
-    schedule();
-  });
+  viewport.addEventListener('wheel', resumeLater, { passive: true });
+  viewport.addEventListener('focusin', updateMotion);
+  viewport.addEventListener('focusout', () => queueMicrotask(updateMotion));
   viewport.addEventListener('keydown', (event) => {
-    focused = true;
-    schedule();
-    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    if (!step || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
     event.preventDefault();
-    move(event.key === 'ArrowLeft' ? -1 : 1);
+    viewport.focus({ preventScroll: true });
+    const direction = event.key === 'ArrowRight' ? 1 : -1;
+    if (direction < 0 && viewport.scrollLeft < step / 2) {
+      track.prepend(track.lastElementChild);
+      viewport.scrollLeft += step;
+    } else if (direction > 0 && viewport.scrollLeft + viewport.clientWidth >= viewport.scrollWidth - 1) {
+      track.append(track.firstElementChild);
+      viewport.scrollLeft -= step;
+    }
+    const target = Math.round(viewport.scrollLeft / step) + direction;
+    viewport.scrollTo({ left: target * step, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
   });
-  document.addEventListener('visibilitychange', schedule);
-  window.addEventListener('hashchange', schedule);
-  reducedMotion.addEventListener('change', schedule);
+
+  track.addEventListener('click', (event) => {
+    const button = event.target.closest('.review-read');
+    if (!button) return;
+    const card = button.closest('.review-card');
+    const rating = card.querySelector('.review-rating').cloneNode(true);
+    rating.querySelector('button').remove();
+    dialog.querySelector('h2').textContent = card.getAttribute('aria-label');
+    dialog.querySelector('.review-dialog-content').replaceChildren(rating, card.querySelector('.review-body').cloneNode(true));
+    queueMicrotask(updateMotion);
+  });
+  dialog.addEventListener('close', updateMotion);
+
+  document.addEventListener('visibilitychange', updateMotion);
+  reducedMotion.addEventListener('change', updateMotion);
   new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting;
-    schedule();
-  }, { threshold: 0.05 }).observe(viewport);
+    updateMotion();
+  }).observe(viewport);
   new ResizeObserver(measure).observe(viewport);
+  document.fonts.ready.then(measure);
   measure();
 })();

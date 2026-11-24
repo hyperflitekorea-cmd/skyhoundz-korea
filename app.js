@@ -122,6 +122,7 @@
     const productGrid = document.querySelector('#product-grid');
     const productCount = document.querySelector('#product-count');
     const shopMenu = window.SHOP_MENU;
+    const reviewDialog = document.querySelector('#review-dialog');
     const productDialog = document.querySelector('#product-dialog');
     const productDialogContent = document.querySelector('#product-dialog-content');
     const searchDialog = document.querySelector('#search-dialog');
@@ -783,6 +784,11 @@
         }
       }
 
+      if (target.closest('[data-open-review]')) {
+        openDialog(reviewDialog);
+        return;
+      }
+
       const requestButton = target.closest('[data-stock-request]');
       if (requestButton) {
         toggleStockRequest(requestButton.dataset.stockRequest);
@@ -858,7 +864,7 @@
       if (target.closest('[data-reset-search], #search-reset')) resetSearch();
     });
 
-    [productDialog, searchDialog, cartDialog].forEach((dialog) => {
+    [reviewDialog, productDialog, searchDialog, cartDialog].forEach((dialog) => {
       if (!dialog) return;
       dialog.addEventListener('close', updateDialogState);
       dialog.addEventListener('click', (event) => {
